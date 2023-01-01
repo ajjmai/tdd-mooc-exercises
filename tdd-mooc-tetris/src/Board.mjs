@@ -6,11 +6,15 @@ export class Board {
   height;
   falling = null;
   fallingBlockRow = 0;
+  fallingBlockColumn = 1;
+  stationary;
 
   
   constructor(width, height) {
     this.width = width;
     this.height = height;
+
+    this.stationary = Array(height).fill(Array(width).fill(EMPTY));
   }
 
   toString() {
@@ -20,7 +24,7 @@ export class Board {
         if (this.hasFallingAt(row, col)) {
           string += this.falling.color;
         } else {
-          string += EMPTY;
+          string += this.stationary[row][col];
         }
       }
       string += LINE_BREAK;
@@ -29,11 +33,11 @@ export class Board {
   }
 
   hasFallingAt(row, col) {
-    return this.falling && row == this.fallingBlockRow && col == 1;
+    return this.hasFalling() && row === this.fallingBlockRow && col === this.fallingBlockColumn;
   }
 
   hasFalling() {
-    return this.falling ? true : false;
+    return this.falling != null;
   }
 
   drop(block) {
@@ -43,9 +47,19 @@ export class Board {
 
     this.falling = block;
     this.fallingBlockRow = 0;
+    this.fallingBlockColumn = 1;
   }
 
   tick() {
-    this.fallingBlockRow++;
+    if (this.fallingBlockRow === this.height - 1) {
+      const row = this.stationary[this.fallingBlockRow]
+        .slice(0, this.fallingBlockColumn)
+        .concat(this.falling.color)
+        .concat(this.stationary[this.fallingBlockRow].slice(this.fallingBlockColumn + 1));
+      this.stationary = this.stationary.slice(0, this.fallingBlockRow).concat([row]).concat(this.stationary.slice(this.fallingBlockRow + 1));
+      this.falling = null;
+    } else {
+      this.fallingBlockRow++;
+    }
   }
 }
