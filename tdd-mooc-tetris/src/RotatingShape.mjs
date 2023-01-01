@@ -13,4 +13,11 @@ export class RotatingShape {
     }
     return string;
   }
+
+  rotateRight() {
+    const reversed = this.shape.reverse();
+    this.shape = reversed[0].map((col, idx) =>(reversed.map(row => row[idx])));
+    return this;
+  }
+
 }
