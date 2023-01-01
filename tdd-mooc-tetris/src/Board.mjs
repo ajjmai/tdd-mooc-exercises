@@ -5,6 +5,7 @@ export class Board {
   width;
   height;
   falling;
+  fallingBlockRow = 0;
 
   
   constructor(width, height) {
@@ -14,8 +15,8 @@ export class Board {
 
   toString() {
     let string = "";
-    for (let col = 0; col < this.height; col++) {
-      for (let row = 0; row < this.width; row++) {
+    for (let row = 0; row < this.height; row++) {
+      for (let col = 0; col < this.width; col++) {
         if (this.hasFallingAt(row, col)) {
           string += this.falling.color;
         } else {
@@ -28,10 +29,15 @@ export class Board {
   }
 
   hasFallingAt(row, col) {
-    return this.falling && col == 0 && row == 1;
+    return this.falling && row == this.fallingBlockRow && col == 1;
   }
 
   drop(block) {
     this.falling = block;
+    this.fallingBlockRow = 0;
+  }
+
+  tick() {
+    this.fallingBlockRow++;
   }
 }
