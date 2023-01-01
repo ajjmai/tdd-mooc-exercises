@@ -40,6 +40,10 @@ export class Board {
     return this.falling != null;
   }
 
+  isOccupied(row, col) {
+    return this.stationary[row][col] !== '.';
+  }
+
   drop(block) {
     if (this.hasFalling()) {
       throw "already falling"
@@ -50,13 +54,14 @@ export class Board {
     this.fallingBlockColumn = 1;
   }
 
+  stopFalling(row, col) {
+    const newRow = this.stationary[row].slice(0, col).concat(this.falling.color).concat(this.stationary[row].slice(col + 1));
+    this.stationary = this.stationary.slice(0, row).concat([newRow]).concat(this.stationary.slice(row + 1));
+  }
+
   tick() {
-    if (this.fallingBlockRow === this.height - 1) {
-      const row = this.stationary[this.fallingBlockRow]
-        .slice(0, this.fallingBlockColumn)
-        .concat(this.falling.color)
-        .concat(this.stationary[this.fallingBlockRow].slice(this.fallingBlockColumn + 1));
-      this.stationary = this.stationary.slice(0, this.fallingBlockRow).concat([row]).concat(this.stationary.slice(this.fallingBlockRow + 1));
+    if (this.fallingBlockRow === this.height - 1 || this.isOccupied(this.fallingBlockRow + 1, this.fallingBlockColumn)) {
+      this.stopFalling(this.fallingBlockRow, this.fallingBlockColumn);
       this.falling = null;
     } else {
       this.fallingBlockRow++;
