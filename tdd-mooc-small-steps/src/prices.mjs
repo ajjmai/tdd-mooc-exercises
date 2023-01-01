@@ -7,6 +7,12 @@ import express from "express";
 function createApp(database) {
   const app = express();
 
+  function convert(date) {
+    return date.toTemporalInstant()
+    .toZonedDateTimeISO("UTC")
+    .toPlainDate()
+  }
+
   app.put("/prices", (req, res) => {
     const liftPassCost = req.query.cost;
     const liftPassType = req.query.type;
