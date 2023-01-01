@@ -4,7 +4,7 @@ const LINE_BREAK = '\n';
 export class Board {
   width;
   height;
-  falling;
+  falling = null;
   fallingBlockRow = 0;
 
   
@@ -32,12 +32,12 @@ export class Board {
     return this.falling && row == this.fallingBlockRow && col == 1;
   }
 
-  isFalling() {
+  hasFalling() {
     return this.falling ? true : false;
   }
 
   drop(block) {
-    if (this.isFalling()) {
+    if (this.hasFalling()) {
       throw "already falling"
     }
 
