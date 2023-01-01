@@ -1,5 +1,5 @@
 const EMPTY = '.';
-const LINE_BREAK = "\n";
+const LINE_BREAK = '\n';
 
 export class Board {
   width;
@@ -32,7 +32,15 @@ export class Board {
     return this.falling && row == this.fallingBlockRow && col == 1;
   }
 
+  isFalling() {
+    return this.falling ? true : false;
+  }
+
   drop(block) {
+    if (this.isFalling()) {
+      throw "already falling"
+    }
+
     this.falling = block;
     this.fallingBlockRow = 0;
   }
