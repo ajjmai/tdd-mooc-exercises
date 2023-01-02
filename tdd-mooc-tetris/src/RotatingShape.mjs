@@ -15,9 +15,17 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    const reversed = this.shape.reverse();
-    this.shape = reversed[0].map((col, idx) =>(reversed.map(row => row[idx])));
-    return this;
+    const reversed = [...this.shape].reverse();
+    const rotated = reversed[0].map((_, idx) =>(reversed.map(row => row[idx])));
+    const parsed = rotated.map(it => it.join('')).join('\n');
+    return new RotatingShape(parsed);
+  }
+
+  rotateLeft() {
+    const rotated =  this.shape[0].map((_, idx) =>(this.shape.map(row => row[idx])));
+    const reversed = rotated.reverse();
+    const parsed = reversed.map(it => it.join('')).join('\n');
+    return new RotatingShape(parsed);
   }
 
 }
