@@ -18,14 +18,18 @@ export class RotatingShape {
     return array.map(it => it.join('')).join('\n');
   }
 
+  rotate(shape) {
+    return shape[0].map((_, idx) =>(shape.map(row => row[idx])))
+  }
+
   rotateRight() {
     const reversed = [...this.shape].reverse();
-    const rotated = reversed[0].map((_, idx) =>(reversed.map(row => row[idx])));
+    const rotated = this.rotate(reversed);
     return new RotatingShape(this.toShapeString(rotated));
   }
 
   rotateLeft() {
-    const rotated =  this.shape[0].map((_, idx) =>(this.shape.map(row => row[idx])));
+    const rotated =  this.rotate(this.shape);
     const reversed = rotated.reverse();
     return new RotatingShape(this.toShapeString(reversed));
   }
