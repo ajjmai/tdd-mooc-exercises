@@ -14,18 +14,20 @@ export class RotatingShape {
     return string;
   }
 
+  toShapeString(array) {
+    return array.map(it => it.join('')).join('\n');
+  }
+
   rotateRight() {
     const reversed = [...this.shape].reverse();
     const rotated = reversed[0].map((_, idx) =>(reversed.map(row => row[idx])));
-    const parsed = rotated.map(it => it.join('')).join('\n');
-    return new RotatingShape(parsed);
+    return new RotatingShape(this.toShapeString(rotated));
   }
 
   rotateLeft() {
     const rotated =  this.shape[0].map((_, idx) =>(this.shape.map(row => row[idx])));
     const reversed = rotated.reverse();
-    const parsed = reversed.map(it => it.join('')).join('\n');
-    return new RotatingShape(parsed);
+    return new RotatingShape(this.toShapeString(reversed));
   }
 
 }
