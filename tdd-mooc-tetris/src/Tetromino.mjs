@@ -2,51 +2,55 @@ import { RotatingShape } from "../src/RotatingShape.mjs";
 
 export class Tetromino {
   shape;
+  orientations = [];
+  currentOrientation;
+
   static T_SHAPE = new Tetromino(
     `.T.
      TTT
-     ...`);
+     ...`,
+    4, 0, []);
 
   static I_SHAPE  = new Tetromino(
     `.....
      .....
      IIII.
      .....
-     .....`
+     .....`,
+    2, 0, []
   );
 
-  constructor(shape) {
-    this.shape = shape.split('\n').map(it => it.trim().split(''));
+  constructor(shape, orientationsCount, currentOrientation, orientations) {
+    this.orientations = orientations;
+    
+    if (!shape) {
+      this.currentOrientation = (currentOrientation + orientations.length) % orientations.length;
+    } else {
+      let s = new RotatingShape(shape);
+      for (let i = 0; i < orientationsCount; i++) {
+        this.orientations.push(s);
+        s = s.rotateRight();
+      }
+      this.currentOrientation = currentOrientation;
+    }
+
     Object.freeze(this);
   }
 
   toString() {
-    let string = "";
-    for (let row = 0; row < this.shape.length; row++) {
-      string += this.shape[row].join('');
-      string += '\n';
-    }
-    return string;
+    return this.orientations[this.currentOrientation].toString()
   }
 
   toShapeString(array) {
     return array.map(it => it.join('')).join('\n');
   }
 
-  rotate(shape) {
-    return shape[0].map((_, idx) =>(shape.map(row => row[idx])))
-  }
-
   rotateRight() {
-    const reversed = [...this.shape].reverse();
-    const rotated = this.rotate(reversed);
-    return new RotatingShape(this.toShapeString(rotated));
+    return new Tetromino(null, null, this.currentOrientation + 1, this.orientations);
   }
 
   rotateLeft() {
-    const rotated =  this.rotate(this.shape);
-    const reversed = rotated.reverse();
-    return new RotatingShape(this.toShapeString(reversed));
+    return new Tetromino(null, null, this.currentOrientation - 1, this.orientations);
   }
 
 }
