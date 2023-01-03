@@ -3,6 +3,7 @@ export class RotatingShape {
 
   constructor(shape) {
     this.shape = shape.split('\n').map(it => it.trim().split(''));
+    Object.freeze(this);
   }
 
   toString() {
