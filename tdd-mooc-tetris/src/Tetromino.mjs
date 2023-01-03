@@ -20,6 +20,13 @@ export class Tetromino {
     2, 0, []
   );
 
+  static O_SHAPE = new Tetromino(
+    `.OO
+     .OO
+     ...`,
+    1, 0, []
+  )
+
   constructor(shape, orientationsCount, currentOrientation, orientations) {
     this.orientations = orientations;
     
@@ -39,10 +46,6 @@ export class Tetromino {
 
   toString() {
     return this.orientations[this.currentOrientation].toString()
-  }
-
-  toShapeString(array) {
-    return array.map(it => it.join('')).join('\n');
   }
 
   rotateRight() {
