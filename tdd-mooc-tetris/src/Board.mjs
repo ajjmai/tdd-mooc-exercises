@@ -94,4 +94,9 @@ export class Board {
     this.fallingBlockColumn -= 1;
   }
 
+  moveRight() {
+    if (!this.hasFalling()) return;
+    this.fallingBlockColumn += 1;
+  }
+
 }
