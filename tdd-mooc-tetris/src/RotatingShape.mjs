@@ -1,3 +1,4 @@
+const EMPTY = '.';
 export class RotatingShape {
   shape;
 
@@ -36,7 +37,7 @@ export class RotatingShape {
   }
 
   height() {
-    return this.shape.length;
+    return this.shape.filter(row => row.some(it => it !== EMPTY)).length;
   }
 
   width() {
@@ -47,4 +48,7 @@ export class RotatingShape {
     return this.shape[row][col];
   }
 
+  rowAt(row) {
+    return this.shape[row];
+  }
 }

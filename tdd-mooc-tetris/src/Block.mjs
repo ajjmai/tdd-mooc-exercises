@@ -16,4 +16,8 @@ export class Block {
   blockAt(_row, _col) {
     return this.color;
   }
+
+  rowAt(_row) {
+    return this.blockAt(0, 0)
+  }
 }

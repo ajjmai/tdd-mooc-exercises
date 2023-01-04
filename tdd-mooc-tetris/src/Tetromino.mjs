@@ -71,5 +71,7 @@ export class Tetromino {
     return this.getCurrentOrientation().blockAt(row, col);
   }
 
-
+  rowAt(row) {
+    return this.getCurrentOrientation().rowAt(row);
+  }
 }

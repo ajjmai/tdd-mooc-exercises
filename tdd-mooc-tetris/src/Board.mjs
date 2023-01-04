@@ -57,6 +57,7 @@ export class Board {
   }
 
   tick() {
+    if (!this.hasFalling()) return;
     if (this.fallingHitsFloor() || this.fallingHitsStationary()) {
       this.stopFalling();
     } else {
@@ -66,7 +67,7 @@ export class Board {
   }
 
   fallingHitsFloor() {
-    return this.fallingBlockRow === this.height - 1;
+    return this.fallingBlockRow + this.fallingBlock.height() === this.height;
   }
 
   fallingHitsStationary() {
@@ -74,12 +75,15 @@ export class Board {
   }
 
   stopFalling() {
-    const newRow = this.stationary[this.fallingBlockRow].slice(0, this.fallingBlockColumn)
-      .concat(this.fallingBlock.blockAt(0,0)).concat(this.stationary[this.fallingBlockRow].slice(this.fallingBlockColumn + 1));
-    console.log(newRow);
-    this.stationary = this.stationary.slice(0, this.fallingBlockRow).concat([newRow])
-      .concat(this.stationary.slice(this.fallingBlockRow + 1));
-
-      this.fallingBlock = null;
+    const stationary = []
+    for (let row = 0; row < this.height; row++) {
+      const newRow = [];
+      for (let col = 0; col < this.width; col++) {
+          newRow.push(this.getBlockAt(row, col));
+      }
+      stationary.push(newRow);
+    }
+    this.stationary = stationary;
+    this.fallingBlock = null;
   }
 }
