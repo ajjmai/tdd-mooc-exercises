@@ -88,4 +88,10 @@ export class Board {
     this.stationary = stationary;
     this.fallingBlock = null;
   }
+
+  moveLeft() {
+    if (!this.hasFalling()) return;
+    this.fallingBlockColumn -= 1;
+  }
+
 }
