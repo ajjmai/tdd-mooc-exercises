@@ -44,8 +44,6 @@ export class RotatingShape {
   }
 
   blockAt(row, col) {
-    console.log("row: ", row, ", col: ", col);
-    console.log("RotatingShape", this.shape[row][col]);
     return this.shape[row][col];
   }
 
