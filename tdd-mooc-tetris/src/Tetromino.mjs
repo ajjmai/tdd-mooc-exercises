@@ -1,7 +1,6 @@
 import { RotatingShape } from "../src/RotatingShape.mjs";
 
 export class Tetromino {
-  shape;
   orientations = [];
   currentOrientation;
 
@@ -45,7 +44,11 @@ export class Tetromino {
   }
 
   toString() {
-    return this.orientations[this.currentOrientation].toString()
+    return this.getCurrentOrientation().toString()
+  }
+
+  getCurrentOrientation() {
+    return this.orientations[this.currentOrientation];
   }
 
   rotateRight() {
@@ -55,5 +58,18 @@ export class Tetromino {
   rotateLeft() {
     return new Tetromino(null, null, this.currentOrientation - 1, this.orientations);
   }
+
+  rows() {
+    return this.getCurrentOrientation().rows();
+  }
+
+  columns() {
+    return this.getCurrentOrientation().columns();
+  }
+
+  blockAt(row, col) {
+    return this.getCurrentOrientation().blockAt(row, col);
+  }
+
 
 }

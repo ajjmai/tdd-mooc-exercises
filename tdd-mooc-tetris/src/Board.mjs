@@ -1,12 +1,13 @@
 const EMPTY = '.';
 const LINE_BREAK = '\n';
+const TOP_ROW = 0;
 
 export class Board {
   width;
   height;
-  fallingBlock = null;
-  fallingBlockRow = 0;
-  fallingBlockColumn = 1;
+  fallingBlock;
+  fallingBlockRow;
+  fallingBlockColumn;
   stationary;
 
   
@@ -30,14 +31,15 @@ export class Board {
 
   getBlockAt(row, col) {
     if (this.hasFallingBlockAt(row, col)) {
-      return this.fallingBlock.color;
+      return this.fallingBlock.blockAt(row - this.fallingBlockRow, col - this.fallingBlockColumn);
     } else {
       return this.stationary[row][col];
     }
   }
 
   hasFallingBlockAt(row, col) {
-    return this.hasFalling() && row === this.fallingBlockRow && col === this.fallingBlockColumn;
+    return this.hasFalling() && row >= this.fallingBlockRow && row < this.fallingBlockRow + this.fallingBlock.rows() && 
+    col >= this.fallingBlockColumn && col < this.fallingBlockColumn + this.fallingBlock.columns();
   }
 
   hasFalling() {
@@ -48,16 +50,17 @@ export class Board {
     if (this.hasFalling()) {
       throw "already falling"
     }
-
+    // start falling
     this.fallingBlock = block;
-    this.fallingBlockRow = 0;
-    this.fallingBlockColumn = 1;
+    this.fallingBlockRow = TOP_ROW;
+    this.fallingBlockColumn = Math.floor((this.width - block.rows()) / 2);
   }
 
   tick() {
     if (this.fallingHitsFloor() || this.fallingHitsStationary()) {
       this.stopFalling();
     } else {
+      // fall one row
       this.fallingBlockRow++;
     }
   }
@@ -75,6 +78,7 @@ export class Board {
       .concat(this.fallingBlock.color).concat(this.stationary[this.fallingBlockRow].slice(this.fallingBlockColumn + 1));
     this.stationary = this.stationary.slice(0, this.fallingBlockRow).concat([newRow])
       .concat(this.stationary.slice(this.fallingBlockRow + 1));
+
       this.fallingBlock = null;
   }
 }

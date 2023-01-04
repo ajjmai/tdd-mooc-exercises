@@ -73,7 +73,6 @@ describe("The I shape", () => {
   });
 
   it("can be rotated left/counter-clockwise", () => {
-    console.log(shape.rotateLeft().toString());
     expect(shape.rotateLeft().toString()).to.equalShape(
       `..I..
        ..I..
@@ -109,7 +108,7 @@ describe("The O shape", () => {
     );
   });
 
-  xit("cannot be rotated left/counter-clockwise", () => {
+  it("cannot be rotated left/counter-clockwise", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
       `.OO
        .OO

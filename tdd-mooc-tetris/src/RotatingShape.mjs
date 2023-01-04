@@ -35,4 +35,18 @@ export class RotatingShape {
     return new RotatingShape(this.toShapeString(reversed));
   }
 
+  rows() {
+    return this.shape.length;
+  }
+
+  columns() {
+    return this.shape[0].length;
+  }
+
+  blockAt(row, col) {
+    console.log("row: ", row, ", col: ", col);
+    console.log("RotatingShape", this.shape[row][col]);
+    return this.shape[row][col];
+  }
+
 }
