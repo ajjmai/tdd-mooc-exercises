@@ -35,11 +35,11 @@ export class RotatingShape {
     return new RotatingShape(this.toShapeString(reversed));
   }
 
-  rows() {
+  height() {
     return this.shape.length;
   }
 
-  columns() {
+  width() {
     return this.shape[0].length;
   }
 

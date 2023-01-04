@@ -59,12 +59,12 @@ export class Tetromino {
     return new Tetromino(null, null, this.currentOrientation - 1, this.orientations);
   }
 
-  rows() {
-    return this.getCurrentOrientation().rows();
+  height() {
+    return this.getCurrentOrientation().height();
   }
 
-  columns() {
-    return this.getCurrentOrientation().columns();
+  width() {
+    return this.getCurrentOrientation().width();
   }
 
   blockAt(row, col) {

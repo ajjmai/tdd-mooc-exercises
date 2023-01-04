@@ -38,8 +38,8 @@ export class Board {
   }
 
   hasFallingBlockAt(row, col) {
-    return this.hasFalling() && row >= this.fallingBlockRow && row < this.fallingBlockRow + this.fallingBlock.rows() && 
-    col >= this.fallingBlockColumn && col < this.fallingBlockColumn + this.fallingBlock.columns();
+    return this.hasFalling() && row >= this.fallingBlockRow && row < this.fallingBlockRow + this.fallingBlock.height() && 
+    col >= this.fallingBlockColumn && col < this.fallingBlockColumn + this.fallingBlock.width();
   }
 
   hasFalling() {
@@ -53,7 +53,7 @@ export class Board {
     // start falling
     this.fallingBlock = block;
     this.fallingBlockRow = TOP_ROW;
-    this.fallingBlockColumn = Math.floor((this.width - block.rows()) / 2);
+    this.fallingBlockColumn = Math.floor((this.width - block.width()) / 2);
   }
 
   tick() {
@@ -76,6 +76,7 @@ export class Board {
   stopFalling() {
     const newRow = this.stationary[this.fallingBlockRow].slice(0, this.fallingBlockColumn)
       .concat(this.fallingBlock.blockAt(0,0)).concat(this.stationary[this.fallingBlockRow].slice(this.fallingBlockColumn + 1));
+    console.log(newRow);
     this.stationary = this.stationary.slice(0, this.fallingBlockRow).concat([newRow])
       .concat(this.stationary.slice(this.fallingBlockRow + 1));
 

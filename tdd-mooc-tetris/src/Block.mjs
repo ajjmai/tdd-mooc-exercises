@@ -5,11 +5,11 @@ export class Block {
     this.color = color;
   }
 
-  rows() {
+  height() {
     return 1;
   }
 
-  columns() {
+  width() {
     return 1;
   }
 
