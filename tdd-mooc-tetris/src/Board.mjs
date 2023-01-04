@@ -75,7 +75,7 @@ export class Board {
 
   stopFalling() {
     const newRow = this.stationary[this.fallingBlockRow].slice(0, this.fallingBlockColumn)
-      .concat(this.fallingBlock.color).concat(this.stationary[this.fallingBlockRow].slice(this.fallingBlockColumn + 1));
+      .concat(this.fallingBlock.blockAt(0,0)).concat(this.stationary[this.fallingBlockRow].slice(this.fallingBlockColumn + 1));
     this.stationary = this.stationary.slice(0, this.fallingBlockRow).concat([newRow])
       .concat(this.stationary.slice(this.fallingBlockRow + 1));
 
