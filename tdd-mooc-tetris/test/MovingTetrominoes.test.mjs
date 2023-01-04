@@ -22,8 +22,6 @@ describe("Falling tetrominoes", () => {
     );
   });
 
-// a falling tetromino can be moved right
-
 it("can be moved rigth", () => {
   board.drop(Tetromino.T_SHAPE);
   board.moveRight();
@@ -38,7 +36,20 @@ it("can be moved rigth", () => {
   );
 });
 
-// a falling tetromino can be moved down
+it("can be moved down", () => {
+  board.drop(Tetromino.T_SHAPE);
+  board.moveDown();
+
+  expect(board.toString()).to.equalShape(
+    `..........
+     ..........
+     ..........
+     ..........
+     ....T.....
+     ...TTT....`
+  );
+});
+
 // it cannot be moved left beyond the board
 // it cannot be moved right beyond the board
 // it cannot be moved down beyond the board (will stop falling)

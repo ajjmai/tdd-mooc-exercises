@@ -60,12 +60,19 @@ export class Board {
 
   tick() {
     if (!this.hasFalling()) return;
-    if (this.fallingHitsFloor() || this.fallingHitsStationary()) {
+    if (!this.canStillFall()) {
       this.stopFalling();
     } else {
-      // fall one row
-      this.fallingBlockRow++;
+      this.fallOneRow();
     }
+  }
+
+  canStillFall() {
+    return !this.fallingHitsFloor() && !this.fallingHitsStationary()
+  }
+
+  fallOneRow() {
+    this.fallingBlockRow++;
   }
 
   fallingHitsFloor() {
@@ -97,6 +104,13 @@ export class Board {
   moveRight() {
     if (!this.hasFalling()) return;
     this.fallingBlockColumn += 1;
+  }
+
+  moveDown() {
+    if (!this.hasFalling()) return;
+    while (this.canStillFall()) {
+      this.fallOneRow()
+    }
   }
 
 }
