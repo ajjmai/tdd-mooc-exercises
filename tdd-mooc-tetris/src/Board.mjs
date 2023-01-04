@@ -38,8 +38,10 @@ export class Board {
   }
 
   hasFallingBlockAt(row, col) {
-    return this.hasFalling() && row >= this.fallingBlockRow && row < this.fallingBlockRow + this.fallingBlock.height() && 
-    col >= this.fallingBlockColumn && col < this.fallingBlockColumn + this.fallingBlock.width();
+    if (this.hasFalling() && row >= this.fallingBlockRow && row < this.fallingBlockRow + this.fallingBlock.height() && 
+    col >= this.fallingBlockColumn && col < this.fallingBlockColumn + this.fallingBlock.width()) {
+      return this.fallingBlock.blockAt(row - this.fallingBlockRow, col - this.fallingBlockColumn) !== EMPTY;
+    }
   }
 
   hasFalling() {
@@ -71,7 +73,7 @@ export class Board {
   }
 
   fallingHitsStationary() {
-    return this.stationary[this.fallingBlockRow + 1][this.fallingBlockColumn] !== EMPTY;
+    return this.stationary[this.fallingBlockRow + this.fallingBlock.height()].some(it => it !== EMPTY);
   }
 
   stopFalling() {
