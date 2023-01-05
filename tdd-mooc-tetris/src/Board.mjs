@@ -1,6 +1,5 @@
 const EMPTY = '.';
 const LINE_BREAK = '\n';
-const TOP_ROW = 0;
 
 export class Board {
   width;
@@ -30,18 +29,22 @@ export class Board {
   }
 
   getBlockAt(row, col) {
-    if (this.hasFallingBlockAt(row, col)) {
-      return this.fallingBlock.blockAt(row - this.fallingBlockRow, col - this.fallingBlockColumn);
-    } else {
+    const block = this.fallingBlockAt(row, col)
+    if (block !== EMPTY) {
+      return block;
+    }
       return this.stationary[row][col];
     }
-  }
 
-  hasFallingBlockAt(row, col) {
-    if (this.hasFalling() && row >= this.fallingBlockRow && row < this.fallingBlockRow + this.fallingBlock.height() && 
-    col >= this.fallingBlockColumn && col < this.fallingBlockColumn + this.fallingBlock.width()) {
-      return this.fallingBlock.blockAt(row - this.fallingBlockRow, col - this.fallingBlockColumn) !== EMPTY;
+  fallingBlockAt(row, col) {
+    const blockRow = row - this.fallingBlockRow;
+    const blockCol = col - this.fallingBlockColumn;
+    if (this.hasFalling() &&
+      blockRow >= 0 && blockRow < this.fallingBlock.height() && 
+      blockCol >= 0 && blockCol < this.fallingBlock.width()) {
+      return this.fallingBlock.blockAt(blockRow, blockCol);
     }
+    return EMPTY;
   }
 
   hasFalling() {
@@ -54,8 +57,16 @@ export class Board {
     }
     // start falling
     this.fallingBlock = block;
-    this.fallingBlockRow = TOP_ROW;
+    this.fallingBlockRow = this.startingRowOffset(block);
     this.fallingBlockColumn = Math.floor((this.width - block.width()) / 2);
+  }
+
+  startingRowOffset(block) {
+    for (let row = 0; row < block.height(); row++) {
+      if (block.rowAt(row).some(it => it !== EMPTY)) {
+        return -row;
+      }
+    }
   }
 
   tick() {
@@ -76,11 +87,30 @@ export class Board {
   }
 
   fallingHitsFloor() {
-    return this.fallingBlockRow + this.fallingBlock.height() === this.height;
+    for (let row = 0; row < this.fallingBlock.height(); row++) {
+      if (this.fallingBlock.rowAt(row).some(it => it !== EMPTY) &&
+       this.fallingBlockRow + row >= this.height - 1) {
+        return true;
+      }
+    }
+    return false;
   }
 
   fallingHitsStationary() {
-    return this.stationary[this.fallingBlockRow + this.fallingBlock.height()].some(it => it !== EMPTY);
+    for (let row = 0; row < this.fallingBlock.height(); row++) {
+      for (let col = 0; col < this.fallingBlock.width(); col++) {
+        const block = this.fallingBlock.blockAt(row, col);
+        if (block !== EMPTY) {
+          const boardRow = this.fallingBlockRow + row;
+          const boardCol = this.fallingBlockColumn + col;
+          console.log(boardRow, boardCol);
+          if (this.stationary[boardRow + 1][boardCol] !== EMPTY) {
+            return true;
+          }
+        }
+      }
+    }
+    return this.stationary[this.fallingBlockRow + 1][this.fallingBlockColumn] !== EMPTY;
   }
 
   stopFalling() {

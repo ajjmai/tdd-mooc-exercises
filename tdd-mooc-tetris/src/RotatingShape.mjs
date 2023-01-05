@@ -37,7 +37,7 @@ export class RotatingShape {
   }
 
   height() {
-    return this.shape.filter(row => row.some(it => it !== EMPTY)).length;
+    return this.shape.length;
   }
 
   width() {

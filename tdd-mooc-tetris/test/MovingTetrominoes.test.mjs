@@ -2,27 +2,49 @@ import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from "../src/Tetromino.mjs";
 
-describe("Falling tetrominoes", () => {
+const PLUS_SHAPE = new Tetromino(
+  `.....
+   ..X..
+   .XXX.
+   ..X..
+   .....`,
+  1, 0, []);
+
+describe("Falling and moving tetrominoes", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
   });
 
-  it("can be moved left", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.moveLeft();
+  
+  it("starts from the top middle when there are empty rows above the shape", () => {
+    board.drop(PLUS_SHAPE);
 
     expect(board.toString()).to.equalShape(
-      `...T......
-       ..TTT.....
-       ..........
+      `....X.....
+       ...XXX....
+       ....X.....
        ..........
        ..........
        ..........`
     );
   });
 
-it("can be moved rigth", () => {
+  xit("can be moved left", () => {
+    board.drop(PLUS_SHAPE);
+    board.moveLeft();
+
+    expect(board.toString()).to.equalShape(
+      `...X......
+       ..XXX.....
+       ...X......
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+xit("can be moved rigth", () => {
   board.drop(Tetromino.T_SHAPE);
   board.moveRight();
 

@@ -18,6 +18,7 @@ export class Block {
   }
 
   rowAt(_row) {
-    return this.blockAt(0, 0)
+    return [this.blockAt(0, 0)];
   }
+
 }
