@@ -21,7 +21,7 @@ export class RotatingShape {
   }
 
   rotate(shape) {
-    return shape[0].map((_, idx) =>(shape.map(row => row[idx])))
+    return shape[0].map((_, idx) => (shape.map(row => row[idx])))
   }
 
   rotateRight() {
@@ -31,7 +31,7 @@ export class RotatingShape {
   }
 
   rotateLeft() {
-    const rotated =  this.rotate(this.shape);
+    const rotated = this.rotate(this.shape);
     const reversed = rotated.reverse();
     return new RotatingShape(this.toShapeString(reversed));
   }
@@ -51,4 +51,25 @@ export class RotatingShape {
   rowAt(row) {
     return this.shape[row];
   }
+
+  rowOffset() {
+    for (let row = 0; row < this.height(); row++) {
+      if (this.shape[row].some(it => it !== EMPTY)) {
+        return -row;
+      }
+    }
+    return 0;
+  }
+
+  colOffset() {
+    for (let col = 0; col < this.width(); col++) {
+      for (let row = 0; row < this.height(); row++) {
+        if (this.shape[row][col] !== EMPTY) {
+          return -col;
+        }
+      }
+    }
+    return 0;
+  }
+
 }

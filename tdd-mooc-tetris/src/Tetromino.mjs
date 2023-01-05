@@ -10,7 +10,7 @@ export class Tetromino {
      ...`,
     4, 0, []);
 
-  static I_SHAPE  = new Tetromino(
+  static I_SHAPE = new Tetromino(
     `.....
      .....
      IIII.
@@ -28,7 +28,7 @@ export class Tetromino {
 
   constructor(shape, orientationsCount, currentOrientation, orientations) {
     this.orientations = orientations;
-    
+
     if (!shape) {
       this.currentOrientation = (currentOrientation + orientations.length) % orientations.length;
     } else {
@@ -73,5 +73,13 @@ export class Tetromino {
 
   rowAt(row) {
     return this.getCurrentOrientation().rowAt(row);
+  }
+
+  rowOffset() {
+    return this.getCurrentOrientation().rowOffset();
+  }
+
+  colOffset() {
+    return this.getCurrentOrientation().colOffset();
   }
 }

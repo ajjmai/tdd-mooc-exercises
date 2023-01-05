@@ -9,7 +9,7 @@ export class Board {
   fallingShapeColumn;
   stationary;
 
-  
+
   constructor(width, height) {
     this.width = width;
     this.height = height;
@@ -21,7 +21,7 @@ export class Board {
     let string = "";
     for (let row = 0; row < this.height; row++) {
       for (let col = 0; col < this.width; col++) {
-          string += this.getBoardCellAt(row, col)
+        string += this.getBoardCellAt(row, col)
       }
       string += LINE_BREAK;
     }
@@ -33,14 +33,14 @@ export class Board {
     if (block !== EMPTY) {
       return block;
     }
-      return this.stationary[row][col];
-    }
+    return this.stationary[row][col];
+  }
 
   getFallingBlockAt(row, col) {
     const blockRow = row - this.fallingShapeRow;
     const blockCol = col - this.fallingShapeColumn;
     if (this.hasFalling() &&
-      blockRow >= 0 && blockRow < this.fallingShape.height() && 
+      blockRow >= 0 && blockRow < this.fallingShape.height() &&
       blockCol >= 0 && blockCol < this.fallingShape.width()) {
       return this.fallingShape.blockAt(blockRow, blockCol);
     }
@@ -57,16 +57,8 @@ export class Board {
     }
     // start falling
     this.fallingShape = shape;
-    this.fallingShapeRow = this.startingRowOffset();
+    this.fallingShapeRow = this.fallingShape.rowOffset();
     this.fallingShapeColumn = Math.floor((this.width - shape.width()) / 2);
-  }
-
-  startingRowOffset() {
-    for (let row = 0; row < this.fallingShape.height(); row++) {
-      if (this.fallingShape.rowAt(row).some(it => it !== EMPTY)) {
-        return -row;
-      }
-    }
   }
 
   tick() {
@@ -89,7 +81,7 @@ export class Board {
   fallingHitsFloor() {
     for (let row = 0; row < this.fallingShape.height(); row++) {
       if (this.fallingShape.rowAt(row).some(it => it !== EMPTY) &&
-       this.fallingShapeRow + row >= this.height - 1) {
+        this.fallingShapeRow + row >= this.height - 1) {
         return true;
       }
     }
@@ -117,7 +109,7 @@ export class Board {
     for (let row = 0; row < this.height; row++) {
       const newRow = [];
       for (let col = 0; col < this.width; col++) {
-          newRow.push(this.getBoardCellAt(row, col));
+        newRow.push(this.getBoardCellAt(row, col));
       }
       stationary.push(newRow);
     }
@@ -126,7 +118,7 @@ export class Board {
   }
 
   moveLeft() {
-    if (!this.hasFalling()) return;
+    if (!this.hasFalling() || this.fallingShapeColumn - this.fallingShape.colOffset() === 0) return;
     this.fallingShapeColumn -= 1;
   }
 
@@ -140,6 +132,7 @@ export class Board {
     while (this.canStillFall()) {
       this.fallOneRow()
     }
+    this.stopFalling();
   }
 
 }
