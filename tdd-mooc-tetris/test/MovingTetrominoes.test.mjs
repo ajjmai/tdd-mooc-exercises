@@ -111,6 +111,20 @@ describe("Falling and moving tetrominoes", () => {
 
   });
 
+  it("it cannot be moved down beyond the board", () => {
+    board.drop(PLUS_SHAPE);
+    board.moveDown();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ....X.....
+       ...XXX....
+       ....X.....`
+    );
+  });
+
   // it cannot be moved down beyond the board (will stop falling)
   // it cannot be moved left through other blocks
   // it cannot be moved right through other blocks
