@@ -118,21 +118,24 @@ export class Board {
   }
 
   moveLeft() {
-    if (!this.hasFalling() || this.fallingShapeColumn - this.fallingShape.colOffset() === 0) return;
-    this.fallingShapeColumn -= 1;
+    if (this.hasFalling() && this.fallingShapeColumn - this.fallingShape.colOffset() !== 0) {
+      this.fallingShapeColumn -= 1;
+    }
   }
 
   moveRight() {
-    if (!this.hasFalling() || this.fallingShapeColumn + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() === this.width) return;
-    this.fallingShapeColumn += 1;
+    if (this.hasFalling() && this.fallingShapeColumn + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() !== this.width) {
+      this.fallingShapeColumn += 1;
+    }
   }
 
   moveDown() {
-    if (!this.hasFalling()) return;
-    while (this.canStillFall()) {
-      this.fallOneRow()
+    if (this.hasFalling()) {
+      while (this.canStillFall()) {
+        this.fallOneRow()
+      }
+      this.stopFalling();
     }
-    this.stopFalling();
   }
 
 }
