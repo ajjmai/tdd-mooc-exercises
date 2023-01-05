@@ -28,4 +28,7 @@ export class Block {
   colOffset() {
     return 0;
   }
+  colOffsetFromRight() {
+    return 0;
+  }
 }

@@ -72,4 +72,15 @@ export class RotatingShape {
     return 0;
   }
 
+  colOffsetFromRight() {
+    for (let col = this.width() - 1; col >= 0; col--) {
+      for (let row = 0; row < this.height(); row++) {
+        if (this.shape[row][col] !== EMPTY) {
+          return this.width() - 1 - col;
+        }
+      }
+    }
+    return 0;
+  }
+
 }

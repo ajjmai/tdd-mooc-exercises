@@ -123,7 +123,7 @@ export class Board {
   }
 
   moveRight() {
-    if (!this.hasFalling()) return;
+    if (!this.hasFalling() || this.fallingShapeColumn + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() === this.width) return;
     this.fallingShapeColumn += 1;
   }
 
