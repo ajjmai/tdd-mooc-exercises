@@ -28,13 +28,15 @@ export class Shop {
       const item = this.items[i];
 
       if (item.name != "Sulfuras, Hand of Ragnaros") {
+        this.decrementSellIn(item);
+
 
         if (item.name == "Aged Brie") {
           this.incrementQualityByAmount(item, 1);
         } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.sellIn < 6) {
+          if (item.sellIn < 5) {
             this.incrementQualityByAmount(item, 3);
-          } else if (item.sellIn < 11) {
+          } else if (item.sellIn < 10) {
             this.incrementQualityByAmount(item, 2);
           } else {
             this.incrementQualityByAmount(item, 1);
@@ -43,7 +45,6 @@ export class Shop {
           this.decrementQualityByOne(item)
         }
 
-        this.decrementSellIn(item);
 
         if (item.sellIn < 0) {
           if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
