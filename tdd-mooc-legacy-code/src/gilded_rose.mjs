@@ -30,26 +30,26 @@ export class Shop {
       if (item.name == "Sulfuras, Hand of Ragnaros") {
         item.quality = 80;
       } else {
-        this.decrementSellIn(item);
-
         if (item.name == "Aged Brie") {
           this.incrementQualityByAmount(item, 1);
         } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.sellIn < 0) {
+          if (item.sellIn <= 0) {
             item.quality = 0
-          } else if (item.sellIn < 5) {
+          } else if (item.sellIn <= 5) {
             this.incrementQualityByAmount(item, 3);
-          } else if (item.sellIn < 10) {
+          } else if (item.sellIn <= 10) {
             this.incrementQualityByAmount(item, 2);
           } else {
             this.incrementQualityByAmount(item, 1);
           }
         } else {
           this.decrementQualityByOne(item)
-          if (item.sellIn < 0) {
+          if (item.sellIn <= 0) {
             this.decrementQualityByOne(item)
           }
         }
+
+        this.decrementSellIn(item);
       }
     }
 
