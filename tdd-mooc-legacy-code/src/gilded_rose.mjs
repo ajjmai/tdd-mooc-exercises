@@ -27,40 +27,36 @@ export class Shop {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
-      if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
-        if (item.name != "Sulfuras, Hand of Ragnaros") {
+      if (item.name != "Sulfuras, Hand of Ragnaros") {
+
+        if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
           this.decrementQualityByOne(item)
-        }
-      } else {
-        if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.sellIn < 6) {
-            this.incrementQualityByAmount(item, 3);
-          } else if (item.sellIn < 11) {
-            this.incrementQualityByAmount(item, 2);
+        } else {
+          if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+            if (item.sellIn < 6) {
+              this.incrementQualityByAmount(item, 3);
+            } else if (item.sellIn < 11) {
+              this.incrementQualityByAmount(item, 2);
+            } else {
+              this.incrementQualityByAmount(item, 1);
+            }
           } else {
             this.incrementQualityByAmount(item, 1);
           }
-        } else {
-          this.incrementQualityByAmount(item, 1);
         }
-      }
-
-      if (item.name != "Sulfuras, Hand of Ragnaros") {
         this.decrementSellIn(item);
-      }
 
-      if (item.sellIn < 0) {
-        if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.name != "Sulfuras, Hand of Ragnaros") {
+        if (item.sellIn < 0) {
+          if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
             this.decrementQualityByOne(item)
+          } else {
+            this.incrementQualityByAmount(item, 1);
           }
-        } else {
-          this.incrementQualityByAmount(item, 1);
         }
-      }
 
-      if (item.name == "Backstage passes to a TAFKAL80ETC concert" && item.sellIn < 0) {
-        item.quality = 0
+        if (item.name == "Backstage passes to a TAFKAL80ETC concert" && item.sellIn < 0) {
+          item.quality = 0
+        }
       }
     }
 
