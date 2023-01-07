@@ -19,26 +19,29 @@ export class Shop {
     item.quality = Math.max(item.quality - 1, 0);
   }
 
+  incrementQualityByAmount(item, amount) {
+    item.quality = Math.min(item.quality + amount, 50);
+  }
+
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
+
       if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
         if (item.name != "Sulfuras, Hand of Ragnaros") {
           this.decrementQualityByOne(item)
         }
       } else {
-        if (item.quality < 50) {
-          if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            if (item.sellIn < 6) {
-              item.quality = Math.min(item.quality + 3, 50);
-            } else if (item.sellIn < 11) {
-              item.quality = Math.min(item.quality + 2, 50);
-            } else {
-              item.quality = item.quality + 1;
-            }
+        if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+          if (item.sellIn < 6) {
+            this.incrementQualityByAmount(item, 3);
+          } else if (item.sellIn < 11) {
+            this.incrementQualityByAmount(item, 2);
           } else {
-            item.quality = item.quality + 1;
+            this.incrementQualityByAmount(item, 1);
           }
+        } else {
+          this.incrementQualityByAmount(item, 1);
         }
       }
 
@@ -48,15 +51,11 @@ export class Shop {
 
       if (item.sellIn < 0) {
         if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.quality > 0) {
-            if (item.name != "Sulfuras, Hand of Ragnaros") {
-              this.decrementQualityByOne(item)
-            }
+          if (item.name != "Sulfuras, Hand of Ragnaros") {
+            this.decrementQualityByOne(item)
           }
         } else {
-          if (item.quality < 50) {
-            item.quality = item.quality + 1;
-          }
+          this.incrementQualityByAmount(item, 1);
         }
       }
 
