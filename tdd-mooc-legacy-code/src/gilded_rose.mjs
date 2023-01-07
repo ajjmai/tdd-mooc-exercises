@@ -33,15 +33,14 @@ export class Shop {
         if (item.name == "Aged Brie") {
           this.incrementQualityByAmount(item, 1);
         } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-          if (item.sellIn < 5) {
+          if (item.sellIn < 0) {
+            item.quality = 0
+          } else if (item.sellIn < 5) {
             this.incrementQualityByAmount(item, 3);
           } else if (item.sellIn < 10) {
             this.incrementQualityByAmount(item, 2);
           } else {
             this.incrementQualityByAmount(item, 1);
-          }
-          if (item.sellIn < 0) {
-            item.quality = 0
           }
         } else {
           this.decrementQualityByOne(item)
