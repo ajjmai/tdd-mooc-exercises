@@ -26,7 +26,7 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("item", 10, 100)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(9);
-    expect(items[0].quality).to.equal(99); // TODO: fix
+    expect(items[0].quality).to.equal(50);
   });
 
   it("item quality value cannot be less than 0", () => {

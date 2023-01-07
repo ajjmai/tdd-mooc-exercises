@@ -16,11 +16,15 @@ export class Shop {
   }
 
   decrementQualityByOne(item) {
-    item.quality = Math.max(item.quality - 1, 0);
+    item.quality = Math.min(Math.max(item.quality - 1, 0), 50);
+  }
+
+  decrementQualityByTwo(item) {
+    item.quality = Math.min(Math.max(item.quality - 2, 0), 50);
   }
 
   incrementQualityByAmount(item, amount) {
-    item.quality = Math.min(item.quality + amount, 50);
+    item.quality = Math.max(Math.min(item.quality + amount, 50), 0);
   }
 
   updateQuality() {
@@ -30,9 +34,7 @@ export class Shop {
       if (item.name == "Sulfuras, Hand of Ragnaros") {
         item.quality = 80;
       } else {
-        if (item.name == "Aged Brie") {
-          this.incrementQualityByAmount(item, 1);
-        } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+        if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
           if (item.sellIn <= 0) {
             item.quality = 0
           } else if (item.sellIn <= 5) {
@@ -42,10 +44,13 @@ export class Shop {
           } else {
             this.incrementQualityByAmount(item, 1);
           }
+        } else if (item.name == "Aged Brie") {
+          this.incrementQualityByAmount(item, 1);
         } else {
-          this.decrementQualityByOne(item)
           if (item.sellIn <= 0) {
-            this.decrementQualityByOne(item)
+            this.decrementQualityByTwo(item);
+          } else {
+            this.decrementQualityByOne(item);
           }
         }
 
