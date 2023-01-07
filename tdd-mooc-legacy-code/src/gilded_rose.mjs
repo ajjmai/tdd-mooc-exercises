@@ -48,8 +48,6 @@ export class Shop {
         if (item.sellIn < 0) {
           if (item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert") {
             this.decrementQualityByOne(item)
-          } else {
-            this.incrementQualityByAmount(item, 1);
           }
         }
 

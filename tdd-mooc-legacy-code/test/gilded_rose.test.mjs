@@ -33,7 +33,7 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("item", 10, 0)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(9);
-    expect(items[0].quality).to.equal(0); // TODO: fix
+    expect(items[0].quality).to.equal(0);
   });
 
   it("Aged Brie quality value increases by 1 every day", () => {
@@ -47,7 +47,7 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 0, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(-1);
-    expect(items[0].quality).to.equal(12); // TODO: fix
+    expect(items[0].quality).to.equal(11);
   });
 
   it("Aged Brie quality value cannot increase above 50", () => {
