@@ -36,11 +36,18 @@ describe("Gilded Rose", () => {
     expect(items[0].quality).to.equal(0); // TODO: fix
   });
 
-  it("Aged Brie quality value increases the older it gets", () => {
+  it("Aged Brie quality value increases by 1 every day", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 10, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(9);
     expect(items[0].quality).to.equal(11);
+  });
+
+  it("Aged Brie quality value increases by 1 every day even past sell date", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 10)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(12); // TODO: fix
   });
 
   it("Aged Brie quality value cannot increase above 50", () => {
