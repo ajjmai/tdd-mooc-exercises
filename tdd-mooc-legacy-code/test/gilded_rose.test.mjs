@@ -68,7 +68,7 @@ describe("Gilded Rose", () => {
     const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", 10, 70)]);
     const items = gildedRose.updateQuality();
     expect(items[0].sellIn).to.equal(10);
-    expect(items[0].quality).to.equal(70); // TODO: fix 
+    expect(items[0].quality).to.equal(80);
   });
 
   it("Backstage passes' quality increases by 1 every day when the sell in value is more that 10", () => {

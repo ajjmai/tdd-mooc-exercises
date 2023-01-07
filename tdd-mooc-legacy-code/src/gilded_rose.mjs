@@ -27,7 +27,9 @@ export class Shop {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
-      if (item.name != "Sulfuras, Hand of Ragnaros") {
+      if (item.name == "Sulfuras, Hand of Ragnaros") {
+        item.quality = 80;
+      } else {
         this.decrementSellIn(item);
 
         if (item.name == "Aged Brie") {
