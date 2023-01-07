@@ -15,12 +15,8 @@ export class Shop {
     item.sellIn = item.sellIn - 1;
   }
 
-  decrementQualityByOne(item) {
-    item.quality = Math.max(item.quality - 1, 0);
-  }
-
-  decrementQualityByTwo(item) {
-    item.quality = Math.max(item.quality - 2, 0);
+  decrementQualityByAmount(item, amount) {
+    item.quality = Math.max(item.quality - amount, 0);
   }
 
   incrementQualityByAmount(item, amount) {
@@ -46,9 +42,9 @@ export class Shop {
           this.incrementQualityByAmount(item, 1);
         } else {
           if (item.sellIn <= 0) {
-            this.decrementQualityByTwo(item);
+            this.decrementQualityByAmount(item, 2);
           } else {
-            this.decrementQualityByOne(item);
+            this.decrementQualityByAmount(item, 1);
           }
         }
 
