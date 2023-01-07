@@ -32,7 +32,7 @@ export class Shop {
       const item = this.items[i];
 
       if (item.name !== "Sulfuras, Hand of Ragnaros") {
-        if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+        if (item.name === "Backstage passes to a TAFKAL80ETC concert") {
           if (item.sellIn <= 0) {
             item.quality = 0
           } else if (item.sellIn <= 5) {
@@ -42,7 +42,7 @@ export class Shop {
           } else {
             this.incrementQualityByAmount(item, 1);
           }
-        } else if (item.name == "Aged Brie") {
+        } else if (item.name === "Aged Brie") {
           this.incrementQualityByAmount(item, 1);
         } else {
           if (item.sellIn <= 0) {
