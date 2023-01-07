@@ -1,0 +1,9 @@
+{
+  "all": true,
+  "clean": true,
+  "report-dir": "coverage/lcov-report",
+  "reporter": [
+    "html",
+    "text"
+  ]
+}
