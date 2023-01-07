@@ -1,8 +1,9 @@
 export class Item {
-  constructor(name, sellIn, quality) {
+  constructor(name, sellIn, quality, conjured = false) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = (this.name === "Sulfuras, Hand of Ragnaros") ? 80 : Math.min(Math.max(quality, 0), 50);
+    this.conjured = conjured;
   }
 }
 
@@ -43,10 +44,13 @@ export class Shop {
           break;
 
         default:
-          if (item.sellIn <= 0) {
-            this.decrementQualityByAmount(item, 2);
+          if (item.conjured) {
+            if (item.sellIn <= 0) this.decrementQualityByAmount(item, 4);
+            else this.decrementQualityByAmount(item, 2);
+
           } else {
-            this.decrementQualityByAmount(item, 1);
+            if (item.sellIn <= 0) this.decrementQualityByAmount(item, 2);
+            else this.decrementQualityByAmount(item, 1);
           }
           break;
       }

@@ -105,4 +105,20 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(-1);
     expect(items[0].quality).to.equal(0);
   });
+
+  it("Conjured item quality decreases by 2 per day when sell in value is above 0", () => {
+    const gildedRose = new Shop([new Item("item", 10, 10, true)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).to.equal(9);
+    expect(items[0].quality).to.equal(8);
+  });
+
+  it("Conjured item quality decreases by 4 per day when sell in value is below 0", () => {
+    const gildedRose = new Shop([new Item("item", 0, 10, true)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(6);
+  });
+
+
 });
