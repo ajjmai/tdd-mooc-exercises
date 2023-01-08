@@ -64,11 +64,11 @@ describe("Falling and moving tetrominoes", () => {
 
     expect(board.toString()).to.equalShape(
       `..........
-     ..........
-     ..........
      ....X.....
      ...XXX....
-     ....X.....`
+       ....X.....
+       ..........
+       ..........`
     );
   });
 
@@ -113,6 +113,12 @@ describe("Falling and moving tetrominoes", () => {
 
   it("it cannot be moved down beyond the board", () => {
     board.drop(PLUS_SHAPE);
+    board.moveDown();
+    board.moveDown();
+    board.moveDown();
+    board.moveDown();
+    board.moveDown();
+    board.moveDown();
     board.moveDown();
 
     expect(board.toString()).to.equalShape(

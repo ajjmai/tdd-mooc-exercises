@@ -130,12 +130,7 @@ export class Board {
   }
 
   moveDown() {
-    if (this.hasFalling()) {
-      while (this.canStillFall()) {
-        this.fallOneRow()
-      }
-      this.stopFalling();
-    }
+    this.tick();
   }
 
 }
