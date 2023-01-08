@@ -7,9 +7,6 @@ export class Board {
   width;
   height;
   fallingShape;
-  movableShape;
-  fallingShapeRow;
-  fallingShapeColumn;
   stationary;
 
 
@@ -40,10 +37,12 @@ export class Board {
   }
 
   getFallingBlockAt(row, col) {
-    const blockRow = row - this.fallingShapeRow;
-    const blockCol = col - this.fallingShapeColumn;
-    if (this.hasFalling() &&
-      blockRow >= 0 && blockRow < this.fallingShape.height() &&
+    if (!this.hasFalling()) return EMPTY;
+
+    const blockRow = row - this.fallingShape.getRow();
+    const blockCol = col - this.fallingShape.getColumn();
+
+    if (blockRow >= 0 && blockRow < this.fallingShape.height() &&
       blockCol >= 0 && blockCol < this.fallingShape.width()) {
       return this.fallingShape.blockAt(blockRow, blockCol);
     }
@@ -59,15 +58,12 @@ export class Board {
       throw "already falling"
     }
     // start falling
-    this.fallingShape = shape;
-    this.fallingShapeRow = this.startingRowOffset();
-    this.fallingShapeColumn = Math.floor((this.width - shape.width()) / 2);
-    // this.movableShape = new MovableShape(shape, Math.floor((this.width - shape.width()) / 2));
+    this.fallingShape = new MovableShape(shape, this.startingRowOffset(shape), Math.floor((this.width - shape.width()) / 2));
   }
 
-  startingRowOffset() {
-    for (let row = 0; row < this.fallingShape.height(); row++) {
-      if (this.fallingShape.rowAt(row).some(it => it !== EMPTY)) {
+  startingRowOffset(shape) {
+    for (let row = 0; row < shape.height(); row++) {
+      if (shape.rowAt(row).some(it => it !== EMPTY)) {
         return -row;
       }
     }
@@ -88,13 +84,13 @@ export class Board {
   }
 
   fallOneRow() {
-    this.fallingShapeRow++;
+    this.fallingShape.setRow(this.fallingShape.getRow() + 1);
   }
 
   fallingHitsFloor() {
     for (let row = 0; row < this.fallingShape.height(); row++) {
       if (this.fallingShape.rowAt(row).some(it => it !== EMPTY) &&
-        this.fallingShapeRow + row >= this.height - 1) {
+        this.fallingShape.getRow() + row >= this.height - 1) {
         return true;
       }
     }
@@ -106,15 +102,15 @@ export class Board {
       for (let col = 0; col < this.fallingShape.width(); col++) {
         const block = this.fallingShape.blockAt(row, col);
         if (block !== EMPTY) {
-          const boardRow = this.fallingShapeRow + row;
-          const boardCol = this.fallingShapeColumn + col;
+          const boardRow = this.fallingShape.getRow() + row;
+          const boardCol = this.fallingShape.getColumn() + col;
           if (this.stationary[boardRow + 1][boardCol] !== EMPTY) {
             return true;
           }
         }
       }
     }
-    return this.stationary[this.fallingShapeRow + 1][this.fallingShapeColumn] !== EMPTY;
+    return this.stationary[this.fallingShape.getRow() + 1][this.fallingShape.getColumn()] !== EMPTY;
   }
 
   stopFalling() {
@@ -131,14 +127,14 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.hasFalling() && this.fallingShapeColumn - this.fallingShape.colOffset() !== 0) {
-      this.fallingShapeColumn -= 1;
+    if (this.hasFalling() && this.fallingShape.getColumn() - this.fallingShape.colOffset() !== 0) {
+      this.fallingShape.setColumn(this.fallingShape.getColumn() - 1);
     }
   }
 
   moveRight() {
-    if (this.hasFalling() && this.fallingShapeColumn + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() !== this.width) {
-      this.fallingShapeColumn += 1;
+    if (this.hasFalling() && this.fallingShape.getColumn() + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() !== this.width) {
+      this.fallingShape.setColumn(this.fallingShape.getColumn() + 1);
     }
   }
 

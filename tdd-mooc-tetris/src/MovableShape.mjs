@@ -4,31 +4,54 @@ export class MovableShape {
   row;
   column;
 
-  constructor(shape, column) {
+  constructor(shape, row, column) {
     this.shape = shape;
-    this.row = this.startingRowOffset(shape);
+    this.row = row;
     this.column = column;
   }
 
-  startingRowOffset(shape) {
-    for (let row = 0; row < shape.height(); row++) {
-      if (shape.rowAt(row).some(it => it !== EMPTY)) {
-        return -row;
-      }
-    }
-    return 0;
+  getRow() {
+    return this.row;
+  }
+
+  getColumn() {
+    return this.column;
+  }
+
+  setRow(row) {
+    this.row = row;
+  }
+
+  setColumn(col) {
+    this.col = col;
   }
 
   height() {
-    this.shape.height();
+    return this.shape.height();
   }
 
   width() {
-    this.shape.width();
+    return this.shape.width();
   }
 
   blockAt(row, col) {
     return this.shape.blockAt(row, col);
+  }
+
+  rowAt(row) {
+    return this.shape.rowAt(row);
+  }
+
+  colOffset() {
+    return this.shape.colOffset();
+  }
+
+  colOffsetFromRight() {
+    return this.shape.colOffsetFromRight();
+  }
+
+  moveDown() {
+    return new MovableShape(this.shape, this.row, this.column + 1);
   }
 
 }
