@@ -52,15 +52,6 @@ export class RotatingShape {
     return this.shape[row];
   }
 
-  rowOffset() {
-    for (let row = 0; row < this.height(); row++) {
-      if (this.shape[row].some(it => it !== EMPTY)) {
-        return -row;
-      }
-    }
-    return 0;
-  }
-
   colOffset() {
     for (let col = 0; col < this.width(); col++) {
       for (let row = 0; row < this.height(); row++) {

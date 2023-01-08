@@ -75,10 +75,6 @@ export class Tetromino {
     return this.getCurrentOrientation().rowAt(row);
   }
 
-  rowOffset() {
-    return this.getCurrentOrientation().rowOffset();
-  }
-
   colOffset() {
     return this.getCurrentOrientation().colOffset();
   }

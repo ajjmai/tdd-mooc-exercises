@@ -1,3 +1,5 @@
+import { MovableShape } from "../src/MovableShape.mjs";
+
 const EMPTY = '.';
 const LINE_BREAK = '\n';
 
@@ -5,6 +7,7 @@ export class Board {
   width;
   height;
   fallingShape;
+  movableShape;
   fallingShapeRow;
   fallingShapeColumn;
   stationary;
@@ -57,8 +60,18 @@ export class Board {
     }
     // start falling
     this.fallingShape = shape;
-    this.fallingShapeRow = this.fallingShape.rowOffset();
+    this.fallingShapeRow = this.startingRowOffset();
     this.fallingShapeColumn = Math.floor((this.width - shape.width()) / 2);
+    // this.movableShape = new MovableShape(shape, Math.floor((this.width - shape.width()) / 2));
+  }
+
+  startingRowOffset() {
+    for (let row = 0; row < this.fallingShape.height(); row++) {
+      if (this.fallingShape.rowAt(row).some(it => it !== EMPTY)) {
+        return -row;
+      }
+    }
+    return 0;
   }
 
   tick() {
