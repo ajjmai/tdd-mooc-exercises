@@ -29,24 +29,13 @@ export class Board {
   }
 
   getBoardCellAt(row, col) {
-    const block = this.getFallingBlockAt(row, col)
-    if (block !== EMPTY) {
-      return block;
+    if (this.hasFalling()) {
+      const block = this.fallingShape.getFallingBlockAt(row, col)
+      if (block !== EMPTY) {
+        return block;
+      }
     }
     return this.stationary[row][col];
-  }
-
-  getFallingBlockAt(row, col) {
-    if (!this.hasFalling()) return EMPTY;
-
-    const blockRow = row - this.fallingShape.getRow();
-    const blockCol = col - this.fallingShape.getColumn();
-
-    if (blockRow >= 0 && blockRow < this.fallingShape.height() &&
-      blockCol >= 0 && blockCol < this.fallingShape.width()) {
-      return this.fallingShape.blockAt(blockRow, blockCol);
-    }
-    return EMPTY;
   }
 
   hasFalling() {

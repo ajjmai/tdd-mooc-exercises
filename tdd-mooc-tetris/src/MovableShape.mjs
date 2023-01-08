@@ -54,4 +54,15 @@ export class MovableShape {
     return new MovableShape(this.shape, this.row, this.column + 1);
   }
 
+  getFallingBlockAt(row, col) {
+    const blockRow = row - this.row;
+    const blockCol = col - this.column;
+
+    if (blockRow >= 0 && blockRow < this.height() &&
+      blockCol >= 0 && blockCol < this.width()) {
+      return this.blockAt(blockRow, blockCol);
+    }
+    return EMPTY;
+  }
+
 }
