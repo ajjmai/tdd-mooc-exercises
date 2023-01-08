@@ -35,11 +35,25 @@ export class MovableShape {
   }
 
   colOffset() {
-    return this.shape.colOffset();
+    for (let col = 0; col < this.width(); col++) {
+      for (let row = 0; row < this.height(); row++) {
+        if (this.shape.blockAt(row, col) !== EMPTY) {
+          return -col;
+        }
+      }
+    }
+    return 0;
   }
 
   colOffsetFromRight() {
-    return this.shape.colOffsetFromRight();
+    for (let col = this.width() - 1; col >= 0; col--) {
+      for (let row = 0; row < this.height(); row++) {
+        if (this.shape.blockAt(row, col) !== EMPTY) {
+          return this.width() - 1 - col;
+        }
+      }
+    }
+    return 0;
   }
 
   moveDown() {
