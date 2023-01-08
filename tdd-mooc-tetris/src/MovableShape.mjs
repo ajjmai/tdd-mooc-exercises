@@ -18,14 +18,6 @@ export class MovableShape {
     return this.column;
   }
 
-  setRow(row) {
-    this.row = row;
-  }
-
-  setColumn(col) {
-    this.col = col;
-  }
-
   height() {
     return this.shape.height();
   }
@@ -52,6 +44,14 @@ export class MovableShape {
 
   moveDown() {
     return new MovableShape(this.shape, this.row + 1, this.column);
+  }
+
+  moveLeft() {
+    return new MovableShape(this.shape, this.row, this.column - 1);
+  }
+
+  moveRight() {
+    return new MovableShape(this.shape, this.row, this.column + 1);
   }
 
 }

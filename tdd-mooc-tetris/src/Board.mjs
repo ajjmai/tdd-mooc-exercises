@@ -128,13 +128,13 @@ export class Board {
 
   moveLeft() {
     if (this.hasFalling() && this.fallingShape.getColumn() - this.fallingShape.colOffset() !== 0) {
-      this.fallingShape.setColumn(this.fallingShape.getColumn() - 1);
+      this.fallingShape = this.fallingShape.moveLeft();
     }
   }
 
   moveRight() {
     if (this.hasFalling() && this.fallingShape.getColumn() + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() !== this.width) {
-      this.fallingShape.setColumn(this.fallingShape.getColumn() + 1);
+      this.fallingShape = this.fallingShape.moveRight();
     }
   }
 
