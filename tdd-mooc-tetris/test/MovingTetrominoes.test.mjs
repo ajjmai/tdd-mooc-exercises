@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
-import { Tetromino } from "../src/Tetromino.mjs";
+import { RotatingShape } from "../src/RotatingShape.mjs";
 
-const PLUS_SHAPE = new Tetromino(
+const PLUS_SHAPE = new RotatingShape(
   `.....
    ..X..
    .XXX.

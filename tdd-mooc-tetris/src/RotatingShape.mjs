@@ -1,5 +1,5 @@
 const EMPTY = '.';
-export class RotatingShape {
+class Shape {
   shape;
 
   constructor(shape) {
@@ -16,24 +16,10 @@ export class RotatingShape {
     return string;
   }
 
-  toShapeString(array) {
-    return array.map(it => it.join('')).join('\n');
-  }
-
-  rotate(shape) {
-    return shape[0].map((_, idx) => (shape.map(row => row[idx])))
-  }
-
   rotateRight() {
     const reversed = [...this.shape].reverse();
-    const rotated = this.rotate(reversed);
-    return new RotatingShape(this.toShapeString(rotated));
-  }
-
-  rotateLeft() {
-    const rotated = this.rotate(this.shape);
-    const reversed = rotated.reverse();
-    return new RotatingShape(this.toShapeString(reversed));
+    const rotated = reversed[0].map((_, idx) => (reversed.map(row => row[idx])))
+    return new Shape(rotated.map(it => it.join('')).join('\n'));
   }
 
   height() {
@@ -74,4 +60,66 @@ export class RotatingShape {
     return 0;
   }
 
+}
+
+export class RotatingShape {
+  orientations = [];
+  currentOrientation;
+
+  constructor(shape, orientationsCount = 4, currentOrientation = 0, orientations = []) {
+    this.orientations = orientations;
+
+    if (!shape) {
+      this.currentOrientation = (currentOrientation + orientations.length) % orientations.length;
+    } else {
+      let s = new Shape(shape);
+      for (let i = 0; i < orientationsCount; i++) {
+        this.orientations.push(s);
+        s = s.rotateRight();
+      }
+      this.currentOrientation = currentOrientation;
+    }
+
+    Object.freeze(this);
+  }
+
+  getCurrentOrientation() {
+    return this.orientations[this.currentOrientation];
+  }
+
+  toString() {
+    return this.getCurrentOrientation().toString()
+  }
+
+  height() {
+    return this.getCurrentOrientation().height();
+  }
+
+  width() {
+    return this.getCurrentOrientation().width();
+  }
+
+  rotateRight() {
+    return new RotatingShape(null, null, this.currentOrientation + 1, this.orientations);
+  }
+
+  rotateLeft() {
+    return new RotatingShape(null, null, this.currentOrientation - 1, this.orientations);
+  }
+
+  blockAt(row, col) {
+    return this.getCurrentOrientation().blockAt(row, col);
+  }
+
+  rowAt(row) {
+    return this.getCurrentOrientation().rowAt(row);
+  }
+
+  colOffset() {
+    return this.getCurrentOrientation().colOffset();
+  }
+
+  colOffsetFromRight() {
+    return this.getCurrentOrientation().colOffsetFromRight();
+  }
 }
