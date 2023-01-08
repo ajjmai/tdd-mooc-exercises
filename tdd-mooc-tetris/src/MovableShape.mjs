@@ -51,7 +51,7 @@ export class MovableShape {
   }
 
   moveDown() {
-    return new MovableShape(this.shape, this.row, this.column + 1);
+    return new MovableShape(this.shape, this.row + 1, this.column);
   }
 
 }

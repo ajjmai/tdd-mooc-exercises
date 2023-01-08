@@ -84,7 +84,7 @@ export class Board {
   }
 
   fallOneRow() {
-    this.fallingShape.setRow(this.fallingShape.getRow() + 1);
+    this.fallingShape = this.fallingShape.moveDown();
   }
 
   fallingHitsFloor() {
