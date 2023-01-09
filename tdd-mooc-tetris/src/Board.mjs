@@ -60,7 +60,6 @@ export class Board {
   }
 
   tick() {
-    if (!this.hasFalling()) return;
     this.moveDown();
   }
 
@@ -92,6 +91,7 @@ export class Board {
   }
 
   moveDown() {
+    if (!this.hasFalling()) return;
     const test = this.fallingShape.moveDown();
     if (test.isOutside(this) || test.collidesWith(this.stationary)) {
       this.stopFalling();

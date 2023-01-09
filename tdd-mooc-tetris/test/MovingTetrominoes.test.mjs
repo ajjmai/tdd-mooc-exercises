@@ -129,9 +129,11 @@ describe("Falling and moving tetrominoes", () => {
        ...XXX....
        ....X.....`
     );
+    expect(board.fallingShape).to.be.null;
   });
 
-  // it cannot be moved down beyond the board (will stop falling)
+  });
+
   // it cannot be moved left through other blocks
   // it cannot be moved right through other blocks
   // it cannot be moved down through other blocks (will stop falling)
