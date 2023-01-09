@@ -157,6 +157,30 @@ describe("Falling and moving tetrominoes", () => {
     );
   });
 
-  // it cannot be moved right through other blocks
+  it("it cannot be moved right through other blocks", () => {
+    board = new Board(null, null,
+      `Z........Z
+       Z........Z
+       Z........Z
+       Z........Z
+       Z........Z
+       Z.ZZZZZZZZ`
+    );
+    board.drop(PLUS_SHAPE);
+    board.moveRight();
+    board.moveRight();
+    board.moveRight();
+    board.moveRight();
+
+    expect(board.toString()).to.equalShape(
+      `Z......X.Z
+       Z.....XXXZ
+       Z......X.Z
+       Z........Z
+       Z........Z
+       Z.ZZZZZZZZ`
+    );
+  });
+
   // it cannot be moved down through other blocks (will stop falling)
 });

@@ -90,7 +90,7 @@ export class Board {
 
   moveRight() {
     const test = this.fallingShape.moveRight();
-    if (!test.isOutside(this)) {
+    if (!test.isOutside(this) && !test.collidesWith(this.stationary)) {
       this.fallingShape = test;
     }
   }
