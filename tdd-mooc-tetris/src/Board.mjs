@@ -10,11 +10,16 @@ export class Board {
   stationary;
 
 
-  constructor(width, height) {
-    this.width = width;
-    this.height = height;
-
-    this.stationary = Array(height).fill(Array(width).fill(EMPTY));
+  constructor(width, height, presetBoard = null) {
+    if (presetBoard) {
+      this.stationary = presetBoard.split('\n').map(it => it.trim().split(''));
+      this.width = this.stationary[0].length;
+      this.height = this.stationary.length;
+    } else {
+      this.stationary = Array(height).fill(Array(width).fill(EMPTY));
+      this.width = width;
+      this.height = height;
+    }
   }
 
   toString() {
@@ -78,7 +83,7 @@ export class Board {
 
   moveLeft() {
     const test = this.fallingShape.moveLeft();
-    if (!test.isOutside(this)) {
+    if (!test.isOutside(this) && !test.collidesWith(this.stationary)) {
       this.fallingShape = test;
     }
   }

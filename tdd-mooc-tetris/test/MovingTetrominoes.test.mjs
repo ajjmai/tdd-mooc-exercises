@@ -50,11 +50,11 @@ describe("Falling and moving tetrominoes", () => {
 
     expect(board.toString()).to.equalShape(
       `.....X....
-     ....XXX...
-     .....X....
-     ..........
-     ..........
-     ..........`
+       ....XXX...
+       .....X....
+       ..........
+       ..........
+       ..........`
     );
   });
 
@@ -64,8 +64,8 @@ describe("Falling and moving tetrominoes", () => {
 
     expect(board.toString()).to.equalShape(
       `..........
-     ....X.....
-     ...XXX....
+       ....X.....
+       ...XXX....
        ....X.....
        ..........
        ..........`
@@ -132,9 +132,31 @@ describe("Falling and moving tetrominoes", () => {
     expect(board.fallingShape).to.be.null;
   });
 
+  it("it cannot be moved left through other blocks", () => {
+    board = new Board(null, null,
+      `Z........Z
+       Z........Z
+       Z........Z
+       Z........Z
+       Z........Z
+       Z.ZZZZZZZZ`
+    );
+    board.drop(PLUS_SHAPE);
+    board.moveLeft();
+    board.moveLeft();
+    board.moveLeft();
+    board.moveLeft();
+
+    expect(board.toString()).to.equalShape(
+      `Z.X......Z
+       ZXXX.....Z
+       Z.X......Z
+       Z........Z
+       Z........Z
+       Z.ZZZZZZZZ`
+    );
   });
 
-  // it cannot be moved left through other blocks
   // it cannot be moved right through other blocks
   // it cannot be moved down through other blocks (will stop falling)
 });
