@@ -20,8 +20,4 @@ export class Block {
   rowAt(_row) {
     return [this.blockAt(0, 0)];
   }
-
-  colOffsetFromRight() {
-    return 0;
-  }
 }

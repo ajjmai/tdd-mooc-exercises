@@ -27,33 +27,13 @@ export class MovableShape {
   }
 
   // relative to shape dimensions
-  blockAt(row, col) {
-    return this.shape.blockAt(row, col);
-  }
-
-  // relative to shape dimensions
-  rowAt(row) {
-    return this.shape.rowAt(row);
-  }
-
-  // relative to shape dimensions
   hasBlockAtCell(row, col) {
-    return this.blockAt(row, col) !== EMPTY;
+    return this.shape.blockAt(row, col) !== EMPTY;
   }
 
+  // relative to shape dimensions
   hasBlockAtRow(row) {
-    return this.rowAt(row).some(it => it !== EMPTY);
-  }
-
-  colOffsetFromRight() {
-    for (let col = this.width() - 1; col >= 0; col--) {
-      for (let row = 0; row < this.height(); row++) {
-        if (this.shape.blockAt(row, col) !== EMPTY) {
-          return this.width() - 1 - col;
-        }
-      }
-    }
-    return 0;
+    return this.shape.rowAt(row).some(it => it !== EMPTY);
   }
 
   moveDown() {
@@ -75,7 +55,7 @@ export class MovableShape {
 
     if (blockRow >= 0 && blockRow < this.height() &&
       blockCol >= 0 && blockCol < this.width()) {
-      return this.blockAt(blockRow, blockCol);
+      return this.shape.blockAt(blockRow, blockCol);
     }
     return EMPTY;
   }
@@ -107,5 +87,4 @@ export class MovableShape {
     }
     return false;
   }
-
 }

@@ -83,26 +83,31 @@ export class Board {
 
   moveLeft() {
     const test = this.fallingShape.moveLeft();
-    if (!test.isOutside(this) && !test.collidesWith(this.stationary)) {
+    if (this.isAllowedToMove(test)) {
       this.fallingShape = test;
     }
   }
 
   moveRight() {
     const test = this.fallingShape.moveRight();
-    if (!test.isOutside(this) && !test.collidesWith(this.stationary)) {
+    if (this.isAllowedToMove(test)) {
       this.fallingShape = test;
     }
   }
 
   moveDown() {
     if (!this.hasFalling()) return;
+
     const test = this.fallingShape.moveDown();
-    if (test.isOutside(this) || test.collidesWith(this.stationary)) {
-      this.stopFalling();
-    } else {
+    if (this.isAllowedToMove(test)) {
       this.fallingShape = test;
+    } else {
+      this.stopFalling();
     }
+  }
+
+  isAllowedToMove(shape) {
+    return !shape.isOutside(this) && !shape.collidesWith(this.stationary);
   }
 
 }
