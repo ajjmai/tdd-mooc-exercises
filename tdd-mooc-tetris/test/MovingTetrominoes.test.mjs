@@ -44,7 +44,7 @@ describe("Falling and moving tetrominoes", () => {
     );
   });
 
-  it("can be moved rigth", () => {
+  it("can be moved right", () => {
     board.drop(PLUS_SHAPE);
     board.moveRight();
 

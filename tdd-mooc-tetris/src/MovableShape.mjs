@@ -99,10 +99,7 @@ export class MovableShape {
     for (let row = 0; row < this.height(); row++) {
       for (let col = 0; col < this.width(); col++) {
         if (this.hasBlockAtCell(row, col)) {
-          if (this.rowOffset + row >= board.height) {
-            return true;
-          }
-          if (this.columnOffset + col < 0) {
+          if (this.rowOffset + row >= board.height || this.columnOffset + col < 0 || this.columnOffset + col >= board.width) {
             return true;
           }
         }

@@ -85,8 +85,9 @@ export class Board {
   }
 
   moveRight() {
-    if (this.hasFalling() && this.fallingShape.column() + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() !== this.width) {
-      this.fallingShape = this.fallingShape.moveRight();
+    const test = this.fallingShape.moveRight();
+    if (!test.isOutside(this)) {
+      this.fallingShape = test;
     }
   }
 
