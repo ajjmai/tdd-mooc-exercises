@@ -41,6 +41,10 @@ export class MovableShape {
     return this.blockAt(row, col) !== EMPTY;
   }
 
+  hasBlockAtRow(row) {
+    return this.rowAt(row).some(it => it !== EMPTY);
+  }
+
   colOffset() {
     for (let col = 0; col < this.width(); col++) {
       for (let row = 0; row < this.height(); row++) {
@@ -87,7 +91,7 @@ export class MovableShape {
     return EMPTY;
   }
 
-  collides(board) {
+  collidesWith(board) {
     for (let row = 0; row < this.height(); row++) {
       for (let col = 0; col < this.width(); col++) {
         if (this.hasBlockAtCell(row, col)) {
@@ -97,6 +101,16 @@ export class MovableShape {
             return true;
           }
         }
+      }
+    }
+    return false;
+  }
+
+  isOutside(board) {
+    for (let row = 0; row < this.height(); row++) {
+      if (this.hasBlockAtRow(row) &&
+        this.row + row >= board.height) {
+        return true;
       }
     }
     return false;

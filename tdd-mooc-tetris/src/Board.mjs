@@ -61,34 +61,13 @@ export class Board {
 
   tick() {
     if (!this.hasFalling()) return;
-    if (!this.canStillFall()) {
+    const test = this.fallingShape.moveDown();
+
+    if (test.isOutside(this) || test.collidesWith(this.stationary)) {
       this.stopFalling();
     } else {
-      this.fallOneRow();
+      this.fallingShape = test;
     }
-  }
-
-  canStillFall() {
-    return !this.fallingHitsFloor() && !this.fallingHitsStationary()
-  }
-
-  fallOneRow() {
-    this.moveDown();
-  }
-
-  fallingHitsFloor() {
-    for (let row = 0; row < this.fallingShape.height(); row++) {
-      if (this.fallingShape.rowAt(row).some(it => it !== EMPTY) &&
-        this.fallingShape.getRow() + row >= this.height - 1) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  fallingHitsStationary() {
-    const test = this.fallingShape.moveDown();
-    return test.collides(this.stationary);
   }
 
   stopFalling() {
