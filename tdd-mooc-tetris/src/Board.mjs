@@ -30,7 +30,7 @@ export class Board {
 
   getBoardCellAt(row, col) {
     if (this.hasFalling()) {
-      const block = this.fallingShape.getFallingBlockAt(row, col)
+      const block = this.fallingShape.getBlockAtBoard(row, col)
       if (block !== EMPTY) {
         return block;
       }
@@ -73,7 +73,7 @@ export class Board {
   }
 
   fallOneRow() {
-    this.fallingShape = this.fallingShape.moveDown();
+    this.moveDown();
   }
 
   fallingHitsFloor() {
@@ -87,19 +87,8 @@ export class Board {
   }
 
   fallingHitsStationary() {
-    for (let row = 0; row < this.fallingShape.height(); row++) {
-      for (let col = 0; col < this.fallingShape.width(); col++) {
-        const block = this.fallingShape.blockAt(row, col);
-        if (block !== EMPTY) {
-          const boardRow = this.fallingShape.getRow() + row;
-          const boardCol = this.fallingShape.getColumn() + col;
-          if (this.stationary[boardRow + 1][boardCol] !== EMPTY) {
-            return true;
-          }
-        }
-      }
-    }
-    return this.stationary[this.fallingShape.getRow() + 1][this.fallingShape.getColumn()] !== EMPTY;
+    const test = this.fallingShape.moveDown();
+    return test.collides(this.stationary);
   }
 
   stopFalling() {
@@ -128,7 +117,7 @@ export class Board {
   }
 
   moveDown() {
-    this.tick();
+    this.fallingShape = this.fallingShape.moveDown();
   }
 
 }

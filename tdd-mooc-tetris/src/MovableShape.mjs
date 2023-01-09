@@ -26,12 +26,19 @@ export class MovableShape {
     return this.shape.width();
   }
 
+  // relative to shape dimensions
   blockAt(row, col) {
     return this.shape.blockAt(row, col);
   }
 
+  // relative to shape dimensions
   rowAt(row) {
     return this.shape.rowAt(row);
+  }
+
+  // relative to shape dimensions
+  hasBlockAtCell(row, col) {
+    return this.blockAt(row, col) !== EMPTY;
   }
 
   colOffset() {
@@ -68,7 +75,8 @@ export class MovableShape {
     return new MovableShape(this.shape, this.row, this.column + 1);
   }
 
-  getFallingBlockAt(row, col) {
+  // relative to board dimensions
+  getBlockAtBoard(row, col) {
     const blockRow = row - this.row;
     const blockCol = col - this.column;
 
@@ -77,6 +85,21 @@ export class MovableShape {
       return this.blockAt(blockRow, blockCol);
     }
     return EMPTY;
+  }
+
+  collides(board) {
+    for (let row = 0; row < this.height(); row++) {
+      for (let col = 0; col < this.width(); col++) {
+        if (this.hasBlockAtCell(row, col)) {
+          const boardRow = this.row + row;
+          const boardCol = this.column + col;
+          if (board[boardRow][boardCol] !== EMPTY) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
 }
