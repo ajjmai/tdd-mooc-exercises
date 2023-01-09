@@ -61,13 +61,7 @@ export class Board {
 
   tick() {
     if (!this.hasFalling()) return;
-    const test = this.fallingShape.moveDown();
-
-    if (test.isOutside(this) || test.collidesWith(this.stationary)) {
-      this.stopFalling();
-    } else {
-      this.fallingShape = test;
-    }
+    this.moveDown();
   }
 
   stopFalling() {
@@ -84,8 +78,9 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.hasFalling() && this.fallingShape.column() - this.fallingShape.colOffset() !== 0) {
-      this.fallingShape = this.fallingShape.moveLeft();
+    const test = this.fallingShape.moveLeft();
+    if (!test.isOutside(this)) {
+      this.fallingShape = test;
     }
   }
 
@@ -96,7 +91,12 @@ export class Board {
   }
 
   moveDown() {
-    this.fallingShape = this.fallingShape.moveDown();
+    const test = this.fallingShape.moveDown();
+    if (test.isOutside(this) || test.collidesWith(this.stationary)) {
+      this.stopFalling();
+    } else {
+      this.fallingShape = test;
+    }
   }
 
 }
