@@ -1,39 +1,23 @@
-const EMPTY = '.';
+import { EMPTY } from './constants.mjs'
 export class MovableShape {
   shape;
   rowOffset;
   columnOffset;
+  width;
+  height;
 
   constructor(shape, row, column) {
     this.shape = shape;
     this.rowOffset = row;
     this.columnOffset = column;
-  }
-
-  row() {
-    return this.rowOffset;
-  }
-
-  column() {
-    return this.columnOffset;
-  }
-
-  height() {
-    return this.shape.height();
-  }
-
-  width() {
-    return this.shape.width();
+    this.width = this.shape.width();
+    this.height = this.shape.height();
+    Object.freeze(this);
   }
 
   // relative to shape dimensions
   hasBlockAtCell(row, col) {
     return this.shape.blockAt(row, col) !== EMPTY;
-  }
-
-  // relative to shape dimensions
-  hasBlockAtRow(row) {
-    return this.shape.rowAt(row).some(it => it !== EMPTY);
   }
 
   moveDown() {
@@ -53,16 +37,16 @@ export class MovableShape {
     const blockRow = row - this.rowOffset;
     const blockCol = col - this.columnOffset;
 
-    if (blockRow >= 0 && blockRow < this.height() &&
-      blockCol >= 0 && blockCol < this.width()) {
+    if (blockRow >= 0 && blockRow < this.height &&
+      blockCol >= 0 && blockCol < this.width) {
       return this.shape.blockAt(blockRow, blockCol);
     }
     return EMPTY;
   }
 
   collidesWith(board) {
-    for (let row = 0; row < this.height(); row++) {
-      for (let col = 0; col < this.width(); col++) {
+    for (let row = 0; row < this.height; row++) {
+      for (let col = 0; col < this.width; col++) {
         if (this.hasBlockAtCell(row, col)) {
           const boardRow = this.rowOffset + row;
           const boardCol = this.columnOffset + col;
@@ -76,8 +60,8 @@ export class MovableShape {
   }
 
   isOutside(board) {
-    for (let row = 0; row < this.height(); row++) {
-      for (let col = 0; col < this.width(); col++) {
+    for (let row = 0; row < this.height; row++) {
+      for (let col = 0; col < this.width; col++) {
         if (this.hasBlockAtCell(row, col)) {
           if (this.rowOffset + row >= board.height || this.columnOffset + col < 0 || this.columnOffset + col >= board.width) {
             return true;

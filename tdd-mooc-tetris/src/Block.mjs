@@ -17,7 +17,7 @@ export class Block {
     return this.color;
   }
 
-  rowAt(_row) {
-    return [this.blockAt(0, 0)];
+  hasBlockAtRow(_row) {
+    return true;
   }
 }

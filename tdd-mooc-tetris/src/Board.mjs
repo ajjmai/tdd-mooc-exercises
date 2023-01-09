@@ -1,14 +1,11 @@
-import { MovableShape } from "../src/MovableShape.mjs";
-
-const EMPTY = '.';
-const LINE_BREAK = '\n';
+import { MovableShape } from "./MovableShape.mjs";
+import { EMPTY, LINE_BREAK } from './constants.mjs'
 
 export class Board {
   width;
   height;
   fallingShape;
   stationary;
-
 
   constructor(width, height, presetBoard = null) {
     if (presetBoard) {
@@ -57,7 +54,7 @@ export class Board {
 
   startingRowOffset(shape) {
     for (let row = 0; row < shape.height(); row++) {
-      if (shape.rowAt(row).some(it => it !== EMPTY)) {
+      if (shape.hasBlockAtRow(row)) {
         return -row;
       }
     }

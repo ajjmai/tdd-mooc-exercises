@@ -1,9 +1,14 @@
-const EMPTY = '.';
+import { EMPTY } from './constants.mjs'
+
 class Shape {
   shape;
+  width;
+  height;
 
   constructor(shape) {
     this.shape = shape.split('\n').map(it => it.trim().split(''));
+    this.width = this.shape[0].length;
+    this.height = this.shape.length;
     Object.freeze(this);
   }
 
@@ -20,14 +25,6 @@ class Shape {
     const reversed = [...this.shape].reverse();
     const rotated = reversed[0].map((_, idx) => (reversed.map(row => row[idx])))
     return new Shape(rotated.map(it => it.join('')).join('\n'));
-  }
-
-  height() {
-    return this.shape.length;
-  }
-
-  width() {
-    return this.shape[0].length;
   }
 
   blockAt(row, col) {
@@ -69,11 +66,11 @@ export class RotatingShape {
   }
 
   height() {
-    return this.getCurrentOrientation().height();
+    return this.getCurrentOrientation().height;
   }
 
   width() {
-    return this.getCurrentOrientation().width();
+    return this.getCurrentOrientation().width;
   }
 
   rotateRight() {
@@ -88,7 +85,7 @@ export class RotatingShape {
     return this.getCurrentOrientation().blockAt(row, col);
   }
 
-  rowAt(row) {
-    return this.getCurrentOrientation().rowAt(row);
+  hasBlockAtRow(row) {
+    return this.getCurrentOrientation().rowAt(row).some(it => it !== EMPTY);
   }
 }
