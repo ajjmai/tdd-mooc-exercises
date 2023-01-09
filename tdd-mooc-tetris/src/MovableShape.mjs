@@ -1,21 +1,21 @@
 const EMPTY = '.';
 export class MovableShape {
   shape;
-  row;
-  column;
+  rowOffset;
+  columnOffset;
 
   constructor(shape, row, column) {
     this.shape = shape;
-    this.row = row;
-    this.column = column;
+    this.rowOffset = row;
+    this.columnOffset = column;
   }
 
-  getRow() {
-    return this.row;
+  row() {
+    return this.rowOffset;
   }
 
-  getColumn() {
-    return this.column;
+  column() {
+    return this.columnOffset;
   }
 
   height() {
@@ -68,21 +68,21 @@ export class MovableShape {
   }
 
   moveDown() {
-    return new MovableShape(this.shape, this.row + 1, this.column);
+    return new MovableShape(this.shape, this.rowOffset + 1, this.columnOffset);
   }
 
   moveLeft() {
-    return new MovableShape(this.shape, this.row, this.column - 1);
+    return new MovableShape(this.shape, this.rowOffset, this.columnOffset - 1);
   }
 
   moveRight() {
-    return new MovableShape(this.shape, this.row, this.column + 1);
+    return new MovableShape(this.shape, this.rowOffset, this.columnOffset + 1);
   }
 
   // relative to board dimensions
   getBlockAtBoard(row, col) {
-    const blockRow = row - this.row;
-    const blockCol = col - this.column;
+    const blockRow = row - this.rowOffset;
+    const blockCol = col - this.columnOffset;
 
     if (blockRow >= 0 && blockRow < this.height() &&
       blockCol >= 0 && blockCol < this.width()) {
@@ -95,8 +95,8 @@ export class MovableShape {
     for (let row = 0; row < this.height(); row++) {
       for (let col = 0; col < this.width(); col++) {
         if (this.hasBlockAtCell(row, col)) {
-          const boardRow = this.row + row;
-          const boardCol = this.column + col;
+          const boardRow = this.rowOffset + row;
+          const boardCol = this.columnOffset + col;
           if (board[boardRow][boardCol] !== EMPTY) {
             return true;
           }
@@ -109,7 +109,7 @@ export class MovableShape {
   isOutside(board) {
     for (let row = 0; row < this.height(); row++) {
       if (this.hasBlockAtRow(row) &&
-        this.row + row >= board.height) {
+        this.rowOffset + row >= board.height) {
         return true;
       }
     }

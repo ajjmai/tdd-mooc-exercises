@@ -84,13 +84,13 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.hasFalling() && this.fallingShape.getColumn() - this.fallingShape.colOffset() !== 0) {
+    if (this.hasFalling() && this.fallingShape.column() - this.fallingShape.colOffset() !== 0) {
       this.fallingShape = this.fallingShape.moveLeft();
     }
   }
 
   moveRight() {
-    if (this.hasFalling() && this.fallingShape.getColumn() + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() !== this.width) {
+    if (this.hasFalling() && this.fallingShape.column() + this.fallingShape.width() - this.fallingShape.colOffsetFromRight() !== this.width) {
       this.fallingShape = this.fallingShape.moveRight();
     }
   }
