@@ -21,7 +21,7 @@ class Shape {
     return string;
   }
 
-  rotateRight() {
+  rotateClockwise() {
     const reversed = [...this.shape].reverse();
     const rotated = reversed[0].map((_, idx) => (reversed.map(row => row[idx])))
     return new Shape(rotated.map(it => it.join('')).join('\n'));
@@ -49,7 +49,7 @@ export class RotatingShape {
       let s = new Shape(shape);
       for (let i = 0; i < orientationsCount; i++) {
         this.orientations.push(s);
-        s = s.rotateRight();
+        s = s.rotateClockwise();
       }
       this.currentOrientation = currentOrientation;
     }
@@ -73,11 +73,11 @@ export class RotatingShape {
     return this.getCurrentOrientation().width;
   }
 
-  rotateRight() {
+  rotateClockwise() {
     return new RotatingShape(null, null, this.currentOrientation + 1, this.orientations);
   }
 
-  rotateLeft() {
+  rotateCounterClockwise() {
     return new RotatingShape(null, null, this.currentOrientation - 1, this.orientations);
   }
 

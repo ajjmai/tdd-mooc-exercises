@@ -32,6 +32,10 @@ export class MovableShape {
     return new MovableShape(this.shape, this.rowOffset, this.columnOffset + 1);
   }
 
+  rotateClockwise() {
+    return new MovableShape(this.shape.rotateClockwise(), this.rowOffset, this.columnOffset);
+  }
+
   // relative to board dimensions
   getBlockAtBoard(row, col) {
     const blockRow = row - this.rowOffset;

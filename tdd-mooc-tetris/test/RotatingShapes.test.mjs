@@ -18,7 +18,7 @@ describe("Rotating 3x3 shape", () => {
   });
 
   it("can be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
+    expect(shape.rotateClockwise().toString()).to.equalShape(
       `GDA
        HEB
        IFC`
@@ -26,7 +26,7 @@ describe("Rotating 3x3 shape", () => {
   });
 
   it("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
+    expect(shape.rotateCounterClockwise().toString()).to.equalShape(
       `CFI
        BEH
        ADG`
@@ -56,7 +56,7 @@ describe("Rotating 5x5 shape", () => {
   });
 
   it("can be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
+    expect(shape.rotateClockwise().toString()).to.equalShape(
       `UPKFA
        VQLGB
        WRMHC
@@ -66,7 +66,7 @@ describe("Rotating 5x5 shape", () => {
   });
 
   it("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
+    expect(shape.rotateCounterClockwise().toString()).to.equalShape(
       `EJOTY
        DINSX
        CHMRW

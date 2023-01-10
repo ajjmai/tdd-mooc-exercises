@@ -107,4 +107,8 @@ export class Board {
     return !shape.isOutside(this) && !shape.collidesWith(this.stationary);
   }
 
+  rotateClockwise() {
+    this.fallingShape = this.fallingShape.rotateClockwise();
+  }
+
 }

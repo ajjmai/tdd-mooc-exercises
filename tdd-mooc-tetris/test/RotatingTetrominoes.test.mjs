@@ -8,16 +8,16 @@ function distinctOrientations(shape) {
   let goingLeft = shape;
   for (let i = 0; i < 10; i++) {
     distinct.add(goingRight.toString());
-    goingRight = goingRight.rotateRight();
+    goingRight = goingRight.rotateClockwise();
     distinct.add(goingLeft.toString());
-    goingLeft = goingLeft.rotateLeft();
+    goingLeft = goingLeft.rotateCounterClockwise();
   }
   return distinct;
 }
 
 describe("The T shape", () => {
   const shape = Tetromino.T_SHAPE;
-  
+
   it("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
       `.T.
@@ -27,7 +27,7 @@ describe("The T shape", () => {
   });
 
   it("can be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
+    expect(shape.rotateClockwise().toString()).to.equalShape(
       `.T.
        .TT
        .T.`
@@ -35,7 +35,7 @@ describe("The T shape", () => {
   });
 
   it("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
+    expect(shape.rotateCounterClockwise().toString()).to.equalShape(
       `.T.
        TT.
        .T.`
@@ -63,7 +63,7 @@ describe("The I shape", () => {
   });
 
   it("can be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
+    expect(shape.rotateClockwise().toString()).to.equalShape(
       `..I..
        ..I..
        ..I..
@@ -73,7 +73,7 @@ describe("The I shape", () => {
   });
 
   it("can be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
+    expect(shape.rotateCounterClockwise().toString()).to.equalShape(
       `..I..
        ..I..
        ..I..
@@ -101,7 +101,7 @@ describe("The O shape", () => {
   });
 
   it("cannot be rotated right/clockwise", () => {
-    expect(shape.rotateRight().toString()).to.equalShape(
+    expect(shape.rotateClockwise().toString()).to.equalShape(
       `.OO
        .OO
        ...`
@@ -109,7 +109,7 @@ describe("The O shape", () => {
   });
 
   it("cannot be rotated left/counter-clockwise", () => {
-    expect(shape.rotateLeft().toString()).to.equalShape(
+    expect(shape.rotateCounterClockwise().toString()).to.equalShape(
       `.OO
        .OO
        ...`
