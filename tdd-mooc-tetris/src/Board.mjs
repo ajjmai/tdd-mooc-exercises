@@ -111,4 +111,8 @@ export class Board {
     this.fallingShape = this.fallingShape.rotateClockwise();
   }
 
+  rotateCounterClockwise() {
+    this.fallingShape = this.fallingShape.rotateCounterClockwise();
+  }
+
 }

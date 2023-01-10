@@ -87,9 +87,22 @@ describe("Falling tetrominoes", () => {
        ..........`
     );
   });
+
+  it("can be rotated counter-clockwise", () => {
+    board.rotateCounterClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `....X.....
+       ....X.....
+       ...XX.....
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
 });
 
-// TODO: can be rotated counter-clockwise
 // TODO: cannot be rotated when there is no room to rotate
 // TODO: [wall kick] when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
 
