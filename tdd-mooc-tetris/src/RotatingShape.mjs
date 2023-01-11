@@ -1,6 +1,6 @@
 import { EMPTY } from './constants.mjs'
 
-class Shape {
+export class Shape {
   shape;
   width;
   height;
@@ -53,7 +53,6 @@ export class RotatingShape {
       }
       this.currentOrientation = currentOrientation;
     }
-
     Object.freeze(this);
   }
 

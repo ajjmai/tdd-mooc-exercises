@@ -121,7 +121,8 @@ export class Board {
       shape.moveLeft(),
       shape.moveRight(),
       shape.moveLeft().moveLeft(),
-      shape.moveRight().moveRight()
+      shape.moveRight().moveRight(),
+      shape.moveDown(),
     ];
     for (const candidate of candidateMoves) {
       if (this.isAllowedToMove(candidate)) {

@@ -58,7 +58,7 @@ export class MovableShape {
         if (this.hasBlockAtCell(row, col)) {
           const boardRow = this.rowOffset + row;
           const boardCol = this.columnOffset + col;
-          if (board[boardRow][boardCol] !== EMPTY) {
+          if (boardRow < 0 || board[boardRow][boardCol] !== EMPTY) {
             return true;
           }
         }
