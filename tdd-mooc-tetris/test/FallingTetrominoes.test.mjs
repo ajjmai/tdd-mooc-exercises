@@ -10,7 +10,7 @@ function fallToBottom(board) {
   }
 }
 
-describe("Falling tetrominoes", () => {
+describe("Dropping tetrominoes", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
@@ -60,22 +60,16 @@ describe("Falling tetrominoes", () => {
   });
 });
 
-
-
 describe("Falling tetrominoes", () => {
-
-  const TEST_SHAPE = new RotatingShape(
+  const L_SHAPE = new RotatingShape(
     `X..
      XXX
-     ...`);
-
-  let board;
-  beforeEach(() => {
-    board = new Board(10, 6);
-    board.drop(TEST_SHAPE);
-  });
+     ...`
+  );
 
   it("can be rotated clockwise", () => {
+    const board = new Board(10, 6);
+    board.drop(L_SHAPE);
     board.rotateClockwise();
 
     expect(board.toString()).to.equalShape(
@@ -89,6 +83,9 @@ describe("Falling tetrominoes", () => {
   });
 
   it("can be rotated counter-clockwise", () => {
+    const board = new Board(10, 6);
+    board.drop(L_SHAPE);
+
     board.rotateCounterClockwise();
 
     expect(board.toString()).to.equalShape(
@@ -98,6 +95,39 @@ describe("Falling tetrominoes", () => {
        ..........
        ..........
        ..........`
+    );
+  });
+
+  const I_SHAPE = new RotatingShape(
+    `.X.
+     .X.
+     .X.`
+  );
+
+  it("cannot be rotated when there is no room to rotate close to left wall", () => {
+    const board = new Board(null, null,
+      `..........
+       ..........
+       ..........
+       ..ZZZZZZZZ
+       ..ZZZZZZZZ
+       ..ZZZZZZZZ`
+    );
+    board.drop(I_SHAPE);
+    for (let i = 0; i < 10; i++) {
+      board.moveLeft();
+    }
+    board.moveDown();
+    board.moveDown();
+    board.rotateClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       X.........
+       X.ZZZZZZZZ
+       X.ZZZZZZZZ
+       ..ZZZZZZZZ`
     );
   });
 
