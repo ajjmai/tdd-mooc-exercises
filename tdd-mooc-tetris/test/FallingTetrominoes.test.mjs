@@ -439,4 +439,22 @@ describe("Wall kicks", () => {
        ..........`
     );
   });
+
+  it("can wall kick two steps to the right", () => {
+    const board = new Board(10, 6);
+    board.drop(II_SHAPE);
+    for (let i = 0; i < 10; i++) {
+      board.moveLeft();
+    }
+    board.rotateClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       XXXXX.....
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });

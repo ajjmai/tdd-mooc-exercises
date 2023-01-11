@@ -116,7 +116,12 @@ export class Board {
   }
 
   tryRotate(shape) {
-    const candidateMoves = [shape, shape.moveLeft(), shape.moveRight()];
+    const candidateMoves = [
+      shape,
+      shape.moveLeft(),
+      shape.moveRight(),
+      shape.moveRight().moveRight()
+    ];
     for (const candidate of candidateMoves) {
       if (this.isAllowedToMove(candidate)) {
         this.fallingShape = candidate;
