@@ -88,6 +88,12 @@ export class Board {
     this.tryMove(test);
   }
 
+  tryMove(shape) {
+    if (this.isAllowedToMove(shape)) {
+      this.fallingShape = shape;
+    }
+  }
+
   moveDown() {
     if (!this.hasFalling()) return;
 
@@ -101,21 +107,26 @@ export class Board {
 
   rotateClockwise() {
     const test = this.fallingShape.rotateClockwise();
-    this.tryMove(test);
+    this.tryRotate(test);
   }
 
   rotateCounterClockwise() {
     const test = this.fallingShape.rotateCounterClockwise();
-    this.tryMove(test);
+    this.tryRotate(test);
+  }
+
+  tryRotate(shape) {
+    if (this.isAllowedToMove(shape)) {
+      this.fallingShape = shape;
+    } else {
+      shape = shape.moveRight();
+      if (this.isAllowedToMove(shape)) {
+        this.fallingShape = shape;
+      }
+    }
   }
 
   isAllowedToMove(shape) {
     return !shape.isOutside(this) && !shape.collidesWith(this.stationary);
-  }
-
-  tryMove(shape) {
-    if (this.isAllowedToMove(shape)) {
-      this.fallingShape = shape;
-    }
   }
 }
