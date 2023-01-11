@@ -145,4 +145,72 @@ describe("Arika rotations", () => {
 
   })
 
+  describe('The O shape', () => {
+    it("starts with first shape", () => {
+      board.drop(Tetromino.O_SHAPE);
+
+      expect(board.toString()).to.equalShape(
+        `....OO....
+         ....OO....
+         ..........
+         ..........`
+      );
+
+    });
+
+    it("can be rotated clockwise", () => {
+      board.drop(Tetromino.O_SHAPE);
+      board.rotateClockwise();
+
+      expect(board.toString()).to.equalShape(
+        `....OO....
+         ....OO....
+         ..........
+         ..........`
+      );
+
+    });
+
+    it("can be rotated counter-clockwise", () => {
+      board.drop(Tetromino.O_SHAPE);
+      board.rotateCounterClockwise();
+
+      expect(board.toString()).to.equalShape(
+        `....OO....
+         ....OO....
+         ..........
+         ..........`
+      );
+    });
+
+    it("loops around clockwise", () => {
+      board.drop(Tetromino.O_SHAPE);
+      for (let i = 0; i < 4; i++) {
+        board.rotateClockwise();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `....OO....
+         ....OO....
+         ..........
+         ..........`
+      );
+    });
+
+    it("loops around counter-clockwise", () => {
+      board.drop(Tetromino.O_SHAPE);
+      for (let i = 0; i < 4; i++) {
+        board.rotateCounterClockwise();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `....OO....
+         ....OO....
+         ..........
+         ..........`
+      );
+    });
+
+  })
+
 })
