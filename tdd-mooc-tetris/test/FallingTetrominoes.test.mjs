@@ -289,6 +289,30 @@ describe("Falling tetrominoes", () => {
      .X.`
   );
 
+  it("can be rotated when there is room close to stationary shapes", () => {
+    const board = new Board(null, null,
+      `..........
+       ..........
+       ..........
+       ZZZ...ZZ..
+       ZZZ...ZZ..
+       ZZZ.Z.ZZ..`
+    );
+    board.drop(I_SHAPE);
+    board.moveDown();
+    board.moveDown();
+    board.rotateClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ZZZXXXZZ..
+       ZZZ...ZZ..
+       ZZZ.Z.ZZ..`
+    );
+  });
+
   it("cannot be rotated when there is no room to rotate close to left wall", () => {
     const board = new Board(null, null,
       `..........
@@ -366,9 +390,7 @@ describe("Falling tetrominoes", () => {
        ZZZ..ZZZ..`
     );
   });
-
 });
 
-// TODO: cannot be rotated when there is no room to rotate
 // TODO: [wall kick] when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
 
