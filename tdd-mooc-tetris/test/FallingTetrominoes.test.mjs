@@ -343,6 +343,30 @@ describe("Falling tetrominoes", () => {
     );
   });
 
+  it("cannot be rotated when there is no room to rotate next to stationary shapes", () => {
+    const board = new Board(null, null,
+      `..........
+       ..........
+       ..........
+       ZZZ..ZZZ..
+       ZZZ..ZZZ..
+       ZZZ..ZZZ..`
+    );
+    board.drop(I_SHAPE);
+    board.moveDown();
+    board.moveDown();
+    board.rotateCounterClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ....X.....
+       ZZZ.XZZZ..
+       ZZZ.XZZZ..
+       ZZZ..ZZZ..`
+    );
+  });
+
 });
 
 // TODO: cannot be rotated when there is no room to rotate
