@@ -120,6 +120,7 @@ export class Board {
       shape,
       shape.moveLeft(),
       shape.moveRight(),
+      shape.moveLeft().moveLeft(),
       shape.moveRight().moveRight()
     ];
     for (const candidate of candidateMoves) {

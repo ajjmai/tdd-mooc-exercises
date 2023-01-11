@@ -401,10 +401,13 @@ describe("Falling tetrominoes", () => {
 });
 
 describe("Wall kicks", () => {
+  let board;
+  beforeEach(() => {
+    board = new Board(10, 6);
+    board.drop(II_SHAPE);
+  });
 
   it("can wall kick one step to the right", () => {
-    const board = new Board(10, 6);
-    board.drop(II_SHAPE);
     for (let i = 0; i < 10; i++) {
       board.moveLeft();
     }
@@ -422,8 +425,6 @@ describe("Wall kicks", () => {
   });
 
   it("can wall kick one step to the left", () => {
-    const board = new Board(10, 6);
-    board.drop(II_SHAPE);
     for (let i = 0; i < 10; i++) {
       board.moveRight();
     }
@@ -441,8 +442,6 @@ describe("Wall kicks", () => {
   });
 
   it("can wall kick two steps to the right", () => {
-    const board = new Board(10, 6);
-    board.drop(II_SHAPE);
     for (let i = 0; i < 10; i++) {
       board.moveLeft();
     }
@@ -452,6 +451,22 @@ describe("Wall kicks", () => {
       `..........
        ..........
        XXXXX.....
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  it("can wall kick two steps to the left", () => {
+    for (let i = 0; i < 10; i++) {
+      board.moveRight();
+    }
+    board.rotateCounterClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       .....XXXXX
        ..........
        ..........
        ..........`
