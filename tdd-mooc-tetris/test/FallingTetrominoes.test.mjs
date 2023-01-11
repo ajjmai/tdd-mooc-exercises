@@ -35,7 +35,7 @@ const II_SHAPE = new RotatingShape(
    ..X...
    ..X...
    ..X...
-   ..X...`
+   ..X...`, 2
 );
 
 describe("Dropping tetrominoes", () => {
@@ -420,7 +420,23 @@ describe("Wall kicks", () => {
        ..........`
     );
   });
+
+  it("can wall kick one step to the left", () => {
+    const board = new Board(10, 6);
+    board.drop(II_SHAPE);
+    for (let i = 0; i < 10; i++) {
+      board.moveRight();
+    }
+    board.moveLeft();
+    board.rotateCounterClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       .....XXXXX
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });
-
-// TODO: [wall kick] when it is up against a wall and is rotated, but there is no room to rotate, move it away from the wall if possible
-

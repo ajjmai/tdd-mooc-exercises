@@ -118,11 +118,10 @@ export class Board {
   tryRotate(shape) {
     if (this.isAllowedToMove(shape)) {
       this.fallingShape = shape;
-    } else {
-      shape = shape.moveRight();
-      if (this.isAllowedToMove(shape)) {
-        this.fallingShape = shape;
-      }
+    } else if (this.isAllowedToMove(shape.moveRight())) {
+      this.fallingShape = shape.moveRight();
+    } else if (this.isAllowedToMove(shape.moveLeft())) {
+      this.fallingShape = shape.moveLeft();
     }
   }
 
