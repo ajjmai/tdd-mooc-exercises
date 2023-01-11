@@ -16,60 +16,93 @@ export class Tetromino {
       .T..`,
 
       `.T..
-      TT..
-      .T..`,
+       TT..
+       .T..`,
 
       `....
-      .T..
-      TTT.`,
+       .T..
+       TTT.`,
 
       `.T..
-      .TT.
-      .T..`
+       .TT.
+       .T..`
     ]
   );
 
 
-  static I_SHAPE = new RotatingShape(
-    `.....
-     .....
-     IIII.
-     .....
-     .....`,
-    2
+  static I_SHAPE = new Tetromino(
+    [`....
+      IIII
+      ....
+      ....`,
+
+      `..I.
+       ..I.
+       ..I.
+       ..I.`
+    ]
   );
 
-  static O_SHAPE = new RotatingShape(
-    `OO
-     OO`,
-    1
+  static O_SHAPE = new Tetromino(
+    [`.OO.
+      .OO.`]
   );
 
-  static L_SHAPE = new RotatingShape(
-    `LLL
-     L..
-     ...`,
-    4
+  static L_SHAPE = new Tetromino(
+    [`....
+      LLL.
+      L...`,
+
+      `.L..
+       .L..
+       .LL.`,
+
+      `....
+       ..L.
+       LLL.`,
+
+      `LL..
+       .L..
+       .L..`]
   );
 
-  static J_SHAPE = new RotatingShape(
-    `JJJ
-     ..J
-     ...`,
-    4
+
+  static J_SHAPE = new Tetromino(
+    [`JJJ.
+      ..J.
+      ....`,
+
+      `.J..
+       .J..
+       JJ..`,
+
+      `...
+       J...
+       JJJ.`,
+
+      `.JJ.
+       .J..
+       .J..`
+    ]
   );
 
-  static Z_SHAPE = new RotatingShape(
-    `...
-     ZZ.
-     .ZZ`,
-    2
+  static Z_SHAPE = new Tetromino(
+    [`....
+      ZZ..
+      .ZZ.`,
+
+      `..Z.
+       .ZZ.
+       .Z..`]
   );
 
-  static S_SHAPE = new RotatingShape(
-    `...
-     .SS
-     SS.`,
-    2
+  static S_SHAPE = new Tetromino(
+    [`....
+      .SS.
+      SS..`,
+
+      `S...
+       SS..
+       .S..`,]
   );
 }
