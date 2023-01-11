@@ -316,6 +316,33 @@ describe("Falling tetrominoes", () => {
     );
   });
 
+  it("cannot be rotated when there is no room to rotate close to right wall", () => {
+    const board = new Board(null, null,
+      `..........
+       ..........
+       ..........
+       ZZZZZZZZ..
+       ZZZZZZZZ..
+       ZZZZZZZZ..`
+    );
+    board.drop(I_SHAPE);
+    for (let i = 0; i < 10; i++) {
+      board.moveRight();
+    }
+    board.moveDown();
+    board.moveDown();
+    board.rotateCounterClockwise();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       .........X
+       ZZZZZZZZ.X
+       ZZZZZZZZ.X
+       ZZZZZZZZ..`
+    );
+  });
+
 });
 
 // TODO: cannot be rotated when there is no room to rotate

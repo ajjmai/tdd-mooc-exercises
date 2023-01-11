@@ -115,7 +115,9 @@ export class Board {
   }
 
   rotateCounterClockwise() {
-    this.fallingShape = this.fallingShape.rotateCounterClockwise();
+    const test = this.fallingShape.rotateCounterClockwise();
+    if (this.isAllowedToMove(test)) {
+      this.fallingShape = test;
+    }
   }
-
 }
