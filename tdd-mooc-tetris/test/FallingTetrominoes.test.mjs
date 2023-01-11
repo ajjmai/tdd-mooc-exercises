@@ -10,6 +10,14 @@ function fallToBottom(board) {
   }
 }
 
+const PLUS_SHAPE = new RotatingShape(
+  `.....
+   ..X..
+   .XXX.
+   ..X..
+   .....`
+);
+
 describe("Dropping tetrominoes", () => {
   let board;
   beforeEach(() => {
@@ -23,6 +31,19 @@ describe("Dropping tetrominoes", () => {
       `....T.....
        ...TTT....
        ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  it("start from the top middle when there are empty rows above the shape", () => {
+    board.drop(PLUS_SHAPE);
+
+    expect(board.toString()).to.equalShape(
+      `....X.....
+       ...XXX....
+       ....X.....
        ..........
        ..........
        ..........`
@@ -59,6 +80,170 @@ describe("Dropping tetrominoes", () => {
     );
   });
 });
+
+describe("Moving tetrominoes", () => {
+  const PLUS_SHAPE = new RotatingShape(
+    `.....
+     ..X..
+     .XXX.
+     ..X..
+     .....`
+  );
+
+  describe("On an empty board", () => {
+    let board;
+    beforeEach(() => {
+      board = new Board(10, 6);
+      board.drop(PLUS_SHAPE);
+    });
+
+    it("can be moved left", () => {
+      board.moveLeft();
+
+      expect(board.toString()).to.equalShape(
+        `...X......
+         ..XXX.....
+         ...X......
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    it("can be moved right", () => {
+      board.moveRight();
+
+      expect(board.toString()).to.equalShape(
+        `.....X....
+         ....XXX...
+         .....X....
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    it("can be moved down", () => {
+      board.moveDown();
+
+      expect(board.toString()).to.equalShape(
+        `..........
+         ....X.....
+         ...XXX....
+         ....X.....
+         ..........
+         ..........`
+      );
+    });
+
+    it("cannot be moved left beyond the board", () => {
+      for (let i = 0; i < 10; i++) {
+        board.moveLeft();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `.X........
+         XXX.......
+         .X........
+         ..........
+         ..........
+         ..........`
+      );
+    });
+
+    it("cannot be moved right beyond the board", () => {
+      for (let i = 0; i < 10; i++) {
+        board.moveRight();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `........X.
+         .......XXX
+         ........X.
+         ..........
+         ..........
+         ..........`
+      );
+
+    });
+
+    it("cannot be moved down beyond the board", () => {
+      for (let i = 0; i < 10; i++) {
+        board.moveDown();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `..........
+         ..........
+         ..........
+         ....X.....
+         ...XXX....
+         ....X.....`
+      );
+      expect(board.fallingShape).to.be.null;
+    });
+  })
+  describe("On a non-empty board", () => {
+    let board;
+    beforeEach(() => {
+      board = new Board(null, null,
+        `Z........Z
+         Z........Z
+         Z........Z
+         Z........Z
+         Z........Z
+         Z.ZZZZZZZZ`
+      );
+      board.drop(PLUS_SHAPE);
+    });
+
+    it("cannot be moved left through other blocks", () => {
+      for (let i = 0; i < 10; i++) {
+        board.moveLeft();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `Z.X......Z
+         ZXXX.....Z
+         Z.X......Z
+         Z........Z
+         Z........Z
+         Z.ZZZZZZZZ`
+      );
+    });
+
+    it("cannot be moved right through other blocks", () => {
+      for (let i = 0; i < 10; i++) {
+        board.moveRight();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `Z......X.Z
+         Z.....XXXZ
+         Z......X.Z
+         Z........Z
+         Z........Z
+         Z.ZZZZZZZZ`
+      );
+    });
+
+    it("cannot be moved down through other blocks", () => {
+      for (let i = 0; i < 10; i++) {
+        board.moveDown();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `Z........Z
+         Z........Z
+         Z...X....Z
+         Z..XXX...Z
+         Z...X....Z
+         Z.ZZZZZZZZ`
+      );
+    });
+  });
+});
+
 
 describe("Falling tetrominoes", () => {
   const L_SHAPE = new RotatingShape(
