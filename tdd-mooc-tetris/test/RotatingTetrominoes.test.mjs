@@ -1,6 +1,5 @@
 
 import { expect } from "chai";
-import { Tetromino } from "../src/Tetromino.mjs";
 import { RotatingShape } from "../src/RotatingShape.mjs";
 
 function distinctOrientations(shape) {

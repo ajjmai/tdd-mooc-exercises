@@ -2,13 +2,18 @@
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { RotatingShape } from "../src/RotatingShape.mjs";
-import { Tetromino } from "../src/Tetromino.mjs";
 
 function fallToBottom(board) {
   for (let i = 0; i < 10; i++) {
     board.tick();
   }
 }
+
+const T_SHAPE = new RotatingShape(
+  `.T.
+   TTT
+   ...`
+);
 
 const PLUS_SHAPE = new RotatingShape(
   `.....
@@ -45,7 +50,7 @@ describe("Dropping tetrominoes", () => {
   });
 
   it("start from the top middle", () => {
-    board.drop(Tetromino.T_SHAPE);
+    board.drop(T_SHAPE);
 
     expect(board.toString()).to.equalShape(
       `....T.....
@@ -71,7 +76,7 @@ describe("Dropping tetrominoes", () => {
   });
 
   it("stop when they hit the bottom", () => {
-    board.drop(Tetromino.T_SHAPE);
+    board.drop(T_SHAPE);
     fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
@@ -85,9 +90,9 @@ describe("Dropping tetrominoes", () => {
   });
 
   it("stop when they land on another block", () => {
-    board.drop(Tetromino.T_SHAPE);
+    board.drop(T_SHAPE);
     fallToBottom(board);
-    board.drop(Tetromino.T_SHAPE);
+    board.drop(T_SHAPE);
     fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
