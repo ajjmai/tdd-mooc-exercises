@@ -19,10 +19,36 @@ export class Tetromino {
   );
 
   static O_SHAPE = new RotatingShape(
-    `.OO
-     .OO
-     ...`,
+    `OO
+     OO`,
     1
   );
 
+  static L_SHAPE = new RotatingShape(
+    `LLL
+     L..
+     ...`,
+    4
+  );
+
+  static J_SHAPE = new RotatingShape(
+    `JJJ
+     ..J
+     ...`,
+    4
+  );
+
+  static Z_SHAPE = new RotatingShape(
+    `...
+     ZZ.
+     .ZZ`,
+    2
+  );
+
+  static S_SHAPE = new RotatingShape(
+    `...
+     .SS
+     SS.`,
+    2
+  );
 }
