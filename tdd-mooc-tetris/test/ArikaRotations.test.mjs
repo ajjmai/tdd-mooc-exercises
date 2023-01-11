@@ -24,7 +24,6 @@ describe("Arika rotations", () => {
 
     it("can be rotated clockwise", () => {
       board.drop(Tetromino.T_SHAPE);
-      // board.tick();
       board.rotateClockwise();
 
       expect(board.toString()).to.equalShape(
@@ -76,6 +75,73 @@ describe("Arika rotations", () => {
       );
     });
 
+  })
+
+  describe('The I shape', () => {
+    it("starts with first shape", () => {
+      board.drop(Tetromino.I_SHAPE);
+
+      expect(board.toString()).to.equalShape(
+        `...IIII...
+         ..........
+         ..........
+         ..........`
+      );
+
+    });
+
+    it("can be rotated clockwise", () => {
+      board.drop(Tetromino.I_SHAPE);
+      board.rotateClockwise();
+
+      expect(board.toString()).to.equalShape(
+        `.....I....
+         .....I....
+         .....I....
+         .....I....`
+      );
+
+    });
+
+    it("can be rotated counter-clockwise", () => {
+      board.drop(Tetromino.I_SHAPE);
+      board.rotateCounterClockwise();
+
+      expect(board.toString()).to.equalShape(
+        `.....I....
+         .....I....
+         .....I....
+         .....I....`
+      );
+    });
+
+    it("loops around clockwise", () => {
+      board.drop(Tetromino.I_SHAPE);
+      for (let i = 0; i < 4; i++) {
+        board.rotateClockwise();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `..........
+         ...IIII...
+         ..........
+         ..........`
+      );
+    });
+
+    it("loops around counter-clockwise", () => {
+      board.drop(Tetromino.I_SHAPE);
+      for (let i = 0; i < 4; i++) {
+        board.rotateCounterClockwise();
+      }
+
+      expect(board.toString()).to.equalShape(
+        `..........
+         ...IIII...
+         ..........
+         ..........`
+      );
+    });
 
   })
 
