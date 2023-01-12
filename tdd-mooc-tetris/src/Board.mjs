@@ -9,7 +9,7 @@ export class Board {
   stationary;
   score;
 
-  constructor(width, height, presetBoard = null) {
+  constructor(width, height, presetBoard = null, level = null) {
     if (presetBoard) {
       this.stationary = presetBoard.split('\n').map(it => it.trim().split(''));
       this.width = this.stationary[0].length;
@@ -19,7 +19,7 @@ export class Board {
       this.width = width;
       this.height = height;
     }
-    this.score = new ScoringSystem();
+    this.score = new ScoringSystem(level);
   }
 
   toString() {
