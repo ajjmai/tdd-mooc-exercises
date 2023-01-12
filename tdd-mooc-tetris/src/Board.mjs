@@ -1,11 +1,13 @@
 import { MovableShape } from "./MovableShape.mjs";
 import { EMPTY, LINE_BREAK } from './constants.mjs'
+import { ScoringSystem } from "./ScoringSystem.mjs";
 
 export class Board {
   width;
   height;
   fallingShape;
   stationary;
+  score;
 
   constructor(width, height, presetBoard = null) {
     if (presetBoard) {
@@ -17,6 +19,7 @@ export class Board {
       this.width = width;
       this.height = height;
     }
+    this.score = new ScoringSystem();
   }
 
   toString() {
@@ -154,6 +157,10 @@ export class Board {
       const emptyRows = Array(this.height - stationary.length).fill(Array(this.width).fill(EMPTY));
       this.stationary = emptyRows.concat(stationary);
     }
+  }
+
+  getScore() {
+    return this.score.getScore();
   }
 
 }
