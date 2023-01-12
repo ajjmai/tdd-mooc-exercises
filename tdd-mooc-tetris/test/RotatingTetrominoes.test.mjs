@@ -95,8 +95,6 @@ describe("The I shape", () => {
   });
 });
 
-
-
 describe("The O shape", () => {
   const shape = new RotatingShape(
     `.OO

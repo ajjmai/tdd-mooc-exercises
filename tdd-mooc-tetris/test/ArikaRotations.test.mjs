@@ -19,7 +19,6 @@ describe("Arika rotations", () => {
          ..........
          ..........`
       );
-
     });
 
     it("can be rotated clockwise", () => {
@@ -32,7 +31,6 @@ describe("Arika rotations", () => {
          ....T.....
          ..........`
       );
-
     });
 
     it("can be rotated counter-clockwise", () => {
@@ -75,7 +73,7 @@ describe("Arika rotations", () => {
       );
     });
 
-  })
+  });
 
   describe('The I shape', () => {
     it("starts with first shape", () => {
@@ -87,7 +85,6 @@ describe("Arika rotations", () => {
          ..........
          ..........`
       );
-
     });
 
     it("can be rotated clockwise", () => {
@@ -100,7 +97,6 @@ describe("Arika rotations", () => {
          .....I....
          .....I....`
       );
-
     });
 
     it("can be rotated counter-clockwise", () => {
@@ -142,8 +138,7 @@ describe("Arika rotations", () => {
          ..........`
       );
     });
-
-  })
+  });
 
   describe('The O shape', () => {
     it("starts with first shape", () => {
@@ -155,7 +150,6 @@ describe("Arika rotations", () => {
          ..........
          ..........`
       );
-
     });
 
     it("can be rotated clockwise", () => {
@@ -168,7 +162,6 @@ describe("Arika rotations", () => {
          ..........
          ..........`
       );
-
     });
 
     it("can be rotated counter-clockwise", () => {
@@ -210,7 +203,5 @@ describe("Arika rotations", () => {
          ..........`
       );
     });
-
-  })
-
-})
+  });
+});

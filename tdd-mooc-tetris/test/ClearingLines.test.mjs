@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { Tetromino } from '../src/Tetromino.mjs';
+import { presetBoard, fallToBottom } from './testUtils.mjs';
 
 describe('Clearing lines', () => {
-
   it('clears one line at the bottom of the board', () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -15,9 +15,7 @@ describe('Clearing lines', () => {
     );
 
     board.drop(Tetromino.T_SHAPE);
-    for (let i = 0; i < 10; i++) {
-      board.tick();
-    }
+    fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -30,7 +28,7 @@ describe('Clearing lines', () => {
   });
 
   it('clears one line at the middle of the board', () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -44,9 +42,7 @@ describe('Clearing lines', () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateClockwise();
     board.moveLeft();
-    for (let i = 0; i < 10; i++) {
-      board.tick();
-    }
+    fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -61,7 +57,7 @@ describe('Clearing lines', () => {
   });
 
   it('clears two lines', () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -75,9 +71,7 @@ describe('Clearing lines', () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateClockwise();
     board.moveLeft();
-    for (let i = 0; i < 10; i++) {
-      board.tick();
-    }
+    fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -92,7 +86,7 @@ describe('Clearing lines', () => {
   });
 
   it('clears three lines', () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -106,9 +100,7 @@ describe('Clearing lines', () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateClockwise();
     board.moveLeft();
-    for (let i = 0; i < 10; i++) {
-      board.tick();
-    }
+    fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -123,7 +115,7 @@ describe('Clearing lines', () => {
   });
 
   it('clears four lines', () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -138,9 +130,7 @@ describe('Clearing lines', () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateClockwise();
     board.moveLeft();
-    for (let i = 0; i < 10; i++) {
-      board.tick();
-    }
+    fallToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..........

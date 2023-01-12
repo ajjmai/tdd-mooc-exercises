@@ -2,12 +2,7 @@
 import { expect } from "chai";
 import { Board } from "../src/Board.mjs";
 import { RotatingShape } from "../src/RotatingShape.mjs";
-
-function fallToBottom(board) {
-  for (let i = 0; i < 10; i++) {
-    board.tick();
-  }
-}
+import { presetBoard, fallToBottom } from './testUtils.mjs';
 
 const T_SHAPE = new RotatingShape(
   `.T.
@@ -189,7 +184,6 @@ describe("Moving tetrominoes", () => {
          ..........
          ..........`
       );
-
     });
 
     it("cannot be moved down beyond the board", () => {
@@ -211,7 +205,7 @@ describe("Moving tetrominoes", () => {
   describe("On a non-empty board", () => {
     let board;
     beforeEach(() => {
-      board = new Board(null, null,
+      board = presetBoard(null,
         `Z........Z
          Z........Z
          Z........Z
@@ -269,7 +263,6 @@ describe("Moving tetrominoes", () => {
   });
 });
 
-
 describe("Falling tetrominoes", () => {
   it("can be rotated clockwise", () => {
     const board = new Board(10, 6);
@@ -303,7 +296,7 @@ describe("Falling tetrominoes", () => {
   });
 
   it("can be rotated when there is room close to stationary shapes", () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -327,7 +320,7 @@ describe("Falling tetrominoes", () => {
   });
 
   it("cannot be rotated when there is no room to rotate close to left wall", () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -354,7 +347,7 @@ describe("Falling tetrominoes", () => {
   });
 
   it("cannot be rotated when there is no room to rotate close to right wall", () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
@@ -381,7 +374,7 @@ describe("Falling tetrominoes", () => {
   });
 
   it("cannot be rotated when there is no room to rotate next to stationary shapes", () => {
-    const board = new Board(null, null,
+    const board = presetBoard(null,
       `..........
        ..........
        ..........
