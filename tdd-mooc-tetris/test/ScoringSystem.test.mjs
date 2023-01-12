@@ -70,4 +70,25 @@ describe('Scoring system', () => {
     expect(board.getScore()).to.equal(300);
   });
 
+  it('clearing four lines gives 1200 points', () => {
+    const board = new Board(null, null,
+      `..........
+       ..........
+       ..........
+       ..........
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ`
+    );
+
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateClockwise();
+    board.moveLeft();
+    for (let i = 0; i < 10; i++) {
+      board.tick();
+    }
+
+    expect(board.getScore()).to.equal(1200);
+  });
 });
