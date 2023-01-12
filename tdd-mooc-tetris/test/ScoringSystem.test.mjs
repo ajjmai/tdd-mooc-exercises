@@ -48,5 +48,26 @@ describe('Scoring system', () => {
     expect(board.getScore()).to.equal(100);
   });
 
+  it('clearing three lines gives 300 points', () => {
+    const board = new Board(null, null,
+      `..........
+       ..........
+       ..........
+       ..........
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ
+       Z.ZZ.ZZ.ZZ
+       ZZZZ.ZZZZZ`
+    );
+
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateClockwise();
+    board.moveLeft();
+    for (let i = 0; i < 10; i++) {
+      board.tick();
+    }
+
+    expect(board.getScore()).to.equal(300);
+  });
 
 });
