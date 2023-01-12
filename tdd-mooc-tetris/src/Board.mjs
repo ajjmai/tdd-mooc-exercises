@@ -76,6 +76,9 @@ export class Board {
     }
     this.stationary = stationary;
     this.fallingShape = null;
+    if (this.shouldClearRows()) {
+      this.clearRows();
+    }
   }
 
   moveLeft() {
@@ -135,4 +138,22 @@ export class Board {
   isAllowedToMove(shape) {
     return !shape.isOutside(this) && !shape.collidesWith(this.stationary);
   }
+
+  shouldClearRows() {
+    return !this.stationary.every(row => row.some(col => col === EMPTY));
+  }
+
+  clearRows() {
+    const stationary = []
+    for (let row = 0; row < this.height; row++) {
+      if (this.stationary[row].some(col => col === EMPTY)) {
+        stationary.push(this.stationary[row])
+      }
+    }
+    if (stationary.length < this.height) {
+      const emptyRows = Array(this.height - stationary.length).fill(Array(this.width).fill(EMPTY));
+      this.stationary = emptyRows.concat(stationary);
+    }
+  }
+
 }
