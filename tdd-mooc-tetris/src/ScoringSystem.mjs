@@ -14,7 +14,9 @@ export class ScoringSystem {
       case 1:
         this.score += 40;
         break;
-
+      case 2:
+        this.score += 100;
+        break;
       default:
         break;
     }
