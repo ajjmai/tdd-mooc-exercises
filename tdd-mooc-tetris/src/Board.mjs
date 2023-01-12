@@ -154,8 +154,10 @@ export class Board {
       }
     }
     if (stationary.length < this.height) {
-      const emptyRows = Array(this.height - stationary.length).fill(Array(this.width).fill(EMPTY));
+      const rowsCleared = this.height - stationary.length;
+      const emptyRows = Array(rowsCleared).fill(Array(this.width).fill(EMPTY));
       this.stationary = emptyRows.concat(stationary);
+      this.score.add(rowsCleared);
     }
   }
 

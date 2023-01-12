@@ -9,4 +9,15 @@ export class ScoringSystem {
     return this.score;
   }
 
+  add(rowsCleared) {
+    switch (rowsCleared) {
+      case 1:
+        this.score += 40;
+        break;
+
+      default:
+        break;
+    }
+  }
+
 }
