@@ -15,7 +15,7 @@ describe('Clearing lines', () => {
     );
 
     board.drop(Tetromino.T_SHAPE);
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       board.tick();
     }
 
@@ -44,7 +44,7 @@ describe('Clearing lines', () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateClockwise();
     board.moveLeft();
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       board.tick();
     }
 
@@ -75,7 +75,7 @@ describe('Clearing lines', () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateClockwise();
     board.moveLeft();
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       board.tick();
     }
 
@@ -106,7 +106,7 @@ describe('Clearing lines', () => {
     board.drop(Tetromino.I_SHAPE);
     board.rotateClockwise();
     board.moveLeft();
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       board.tick();
     }
 
@@ -122,4 +122,36 @@ describe('Clearing lines', () => {
     );
   });
 
+  it('clears four lines', () => {
+    const board = new Board(null, null,
+      `..........
+       ..........
+       ..........
+       ..........
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ
+       ZZZZ.ZZZZZ`
+    );
+
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateClockwise();
+    board.moveLeft();
+    for (let i = 0; i < 10; i++) {
+      board.tick();
+    }
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ZZZZ.ZZZZZ`
+    );
+  });
 });
