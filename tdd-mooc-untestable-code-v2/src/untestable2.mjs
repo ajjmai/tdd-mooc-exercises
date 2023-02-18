@@ -1,3 +1,8 @@
+// When testing randomness, one cannot assert exact values.
+// Also random values may randomly be in a predictable order, so test asserting the order to not to be something will fail occasionally.
+// I don't know how this function could be refactored to be more easily testable since
+// seed cannot be provided to Math.random(), but this can be tested ok.
+
 function diceRoll() {
   const min = 1;
   const max = 6;
