@@ -17,24 +17,29 @@ fun parseGrid(gridSizeString: String, patternString: String): List<List<Int>> {
     var row = 0
     patterns.forEach { pattern ->
         val matches = patternRegex.findAll(pattern).map { it.groupValues[1] }.toList().filter { it.isNotEmpty() }
-        var col = 0
-        for (m in matches) {
-            if (m.matches(patternWithCountRegex)) {
-                val (count, state) = patternWithCountRegex.find(m)!!.destructured
-                if (state.lowercase() != DEAD) {
-                    for (i in 0 until count.toInt()) {
-                        grid[row][col + i] = 1
+
+        if (matches.size == 1 && matches.first().toIntOrNull() != null) {
+            row += matches.first().toInt()
+        } else {
+            var col = 0
+            for (m in matches) {
+                if (m.matches(patternWithCountRegex)) {
+                    val (count, state) = patternWithCountRegex.find(m)!!.destructured
+                    if (state.lowercase() != DEAD) {
+                        for (i in 0 until count.toInt()) {
+                            grid[row][col + i] = 1
+                        }
                     }
+                    col += count.toInt()
+                } else if (m.toIntOrNull() != null) {
+                    row += m.toInt() - 1
+                } else {
+                    if (m.lowercase() != DEAD) grid[row][col] = 1
+                    col++
                 }
-                col += count.toInt()
-            } else if (m.toIntOrNull() != null) {
-              row += m.toInt() - 1
-            } else {
-                if (m.lowercase() != DEAD) grid[row][col] = 1
-                col++
             }
+            row++
         }
-        row++
     }
     return grid
 }

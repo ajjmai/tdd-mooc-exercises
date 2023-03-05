@@ -1,0 +1,8 @@
+#N Sailboat after 10 iterations
+#0 Aija's Game of Life App 05-03-2023 11:01
+x = 29, y = 25
+8bo11bo8b$7bobo9bobo7b$8bo11bo8b$29b$6b5o7b5o6b$5bo4bo7bo4bo5b$4bo2bo1
+3bo2bo4b$bo2bob2o13b2obo2bob$obobo5bo7bo5bobobo$bo2bo4b2o6bobo4bo2bob$
+4b2o2b3o6bo2bo2b2o4b$18b2o9b$14b2o13b$13bobo13b$14bo2b2o10b$29b$4b2ob6
+o2bo3bo9b$4b2ob6o2bo4bo8b$4b2o11bobobo7b$4b2o5b2o5bobobo6b$4b2o5b2o6bo
+4bo4b$4b2o5b2o7bo3bo4b$11b2o16b$4b6ob2o8b2o6b$4b6ob2o16b!

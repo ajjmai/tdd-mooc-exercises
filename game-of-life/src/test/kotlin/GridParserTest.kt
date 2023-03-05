@@ -84,9 +84,9 @@ class GridParserTest {
     }
 
     @Test
-    fun`pattern parsing can handle several lines without end character`() {
+    fun`pattern parsing can handle empty lines following lines without end character`() {
         val grid = parseGrid("x = 4, y = 4", "2bob2\$o!")
-        assertEquals(listOf(listOf(0,0,1,0), listOf(0,0,0,0), listOf(0,0,0,0), listOf(1,0,0,0)), grid)
+        assertEquals(listOf(listOf(0,0,1,0), listOf(0,0,0,0), listOf(1,0,0,0), listOf(0,0,0,0)), grid)
     }
 
     @Test
